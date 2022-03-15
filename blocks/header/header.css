@@ -1,3 +1,6 @@
 .header {
-
+    display: flex;
+    justify-content: left;
+    padding: 45px 200px 36px;
+    flex-direction: column;
 }
