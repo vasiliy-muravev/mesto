@@ -1,0 +1,8 @@
+.info {
+    margin: auto 18px auto 30px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 336px;
+    max-height: 73px;
+    align-content: center;
+}
