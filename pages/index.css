@@ -13,3 +13,11 @@
 @import url(../blocks/info/__title/info__title.css);
 @import url(../blocks/info/__subtitle/info__subtitle.css);
 @import url(../blocks/info/__redact-button/info__redact-button.css);
+@import url(../blocks/places/places.css);
+@import url(../blocks/place/place.css);
+@import url(../blocks/place/__image/place__image.css);
+@import url(../blocks/description/description.css);
+@import url(../blocks/description/__like/description__like.css);
+@import url(../blocks/description/__title/description__title.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);

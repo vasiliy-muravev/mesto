@@ -1,0 +1,10 @@
+.description__like {
+    background-image: url(../../../images/like_empty.svg);
+    width: 22px;
+    height: 19px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+    margin-right: 30px;
+}
