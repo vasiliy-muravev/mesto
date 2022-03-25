@@ -10,6 +10,7 @@
     align-self: end;
     border: none;
     cursor: pointer;
+    display: inline-block;
 }
 
 .info__redact-button:hover {
