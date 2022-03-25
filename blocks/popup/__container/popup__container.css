@@ -1,0 +1,7 @@
+.popup__container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    margin-left: calc(50vw - 215px);
+    margin-top: 195px;
+}
