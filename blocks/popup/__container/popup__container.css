@@ -5,3 +5,10 @@
     margin-left: calc(50vw - 215px);
     margin-top: 195px;
 }
+
+@media screen and (max-width: 860px) {
+    .popup__container {
+        margin-top: 123px;
+        margin-left: calc(50vw - 141px);
+    }
+}

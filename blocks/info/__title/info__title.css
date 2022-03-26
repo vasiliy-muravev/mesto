@@ -8,3 +8,11 @@
     overflow: hidden;
     max-width: 294px;
 }
+
+@media screen and (max-width: 1070px) {
+    .info__title {
+        font-size: 27px;
+        line-height: 1.22;
+        max-width: 189px;
+    }
+}

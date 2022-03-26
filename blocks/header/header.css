@@ -4,3 +4,9 @@
     padding: 45px 200px 36px;
     flex-direction: column;
 }
+
+@media screen and (max-width: 1070px) {
+    .header {
+        padding: 0 0 38px 0;
+    }
+}

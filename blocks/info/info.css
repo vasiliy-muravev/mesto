@@ -6,3 +6,10 @@
     max-height: 73px;
     align-content: center;
 }
+
+@media screen and (max-width: 1070px) {
+    .info {
+        justify-content: center;
+        margin-bottom: 36px;
+    }
+}

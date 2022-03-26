@@ -16,3 +16,10 @@
 .info__redact-button:hover {
     opacity: 0.6;
 }
+
+@media screen and (max-width: 1070px) {
+    .info__redact-button {
+        width: 18px;
+        height: 18px;
+    }
+}

@@ -5,3 +5,9 @@
     min-height: 182px;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 860px) {
+    .popup__form {
+        padding: 75px 22px 25px;
+    }
+}

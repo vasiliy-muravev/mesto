@@ -2,3 +2,12 @@
     width: 142px;
     height: 33px;
 }
+
+@media screen and (max-width: 1070px) {
+    .header__logo {
+        padding-left: 28px;
+        padding-top: 27px;
+        width: 104px;
+        height: 24px;
+    }
+}
