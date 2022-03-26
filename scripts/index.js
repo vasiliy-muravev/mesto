@@ -40,7 +40,6 @@ let infoSubtitle = document.querySelector('.info__subtitle');
 /* Обработчик «отправки» формы */
 function formSubmitHandler(event) {
     event.preventDefault();
-    console.log(nameInput.value);
     infoTitle.textContent = nameInput.value;
     infoSubtitle.textContent = jobInput.value;
     closePopup();

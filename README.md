@@ -1,17 +1,45 @@
-# Проект: Место
+# Project: Place (landing page)
 
-### Обзор
+See demo [https://vasiliy-muravev.github.io/mesto/](https://vasiliy-muravev.github.io/mesto/)
 
-* Figma
-* Картинки
+## What is this?
 
-**Figma**
+One page website on pure modern Html and CSS. Educational project from [https://practicum.yandex.ru](https://practicum.yandex.ru). [Figma layout](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=28212%3A269)
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+## Use
 
-**Картинки**
+1. Download project files
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+- The easiest way to run a project is download zip
+  from [https://github.com/vasiliy-muravev/mesto](https://github.com/vasiliy-muravev/russian-travel)
+- Or you can use the command
 
-Удачи!
+```sh
+git clone https://github.com/vasiliy-muravev/mesto.git
+```
+
+2. Open the index.html file in any browser
+
+## Inside
+
+### Structure
+
+- Header
+- Main
+- Footer
+- Popup
+
+### Blocks
+
+- `profile`
+- `places`
+- `popup`
+
+### Technologies
+
+- html
+- css
+- flex
+- grid
+- js
+- BEM methodology
