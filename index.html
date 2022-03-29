@@ -13,20 +13,20 @@
 <div class="page">
 
     <header class="header">
-        <img class="header__logo" alt="Место Россия" src="./images/__logo.svg">
+        <div class="header__logo"></div>
         <div class="header__line"></div>
     </header>
 
-    <main class="content">
+    <main>
 
         <section class="profile">
             <img alt="Жак-Ив Кусто" class="profile__avatar" src="./images/avatar.jpg">
             <div class="info">
                 <h1 class="info__title">Жак-Ив Кусто</h1>
-                <button class="info__redact-button"></button>
+                <button type="button" class="info__redact-button"></button>
                 <p class="info__subtitle">Исследователь океана</p>
             </div>
-            <button class="profile__add-button"></button>
+            <button type="button" class="profile__add-button"></button>
         </section>
 
         <section class="places">
@@ -34,42 +34,42 @@
                 <img class="place__image" alt="Архыз" src="./images/arkhyz.jpg">
                 <div class="description">
                     <h2 class="description__title">Архыз</h2>
-                    <div class="description__like"></div>
+                    <button type="button" class="description__like"></button>
                 </div>
             </article>
             <article class="place">
                 <img class="place__image" alt="Фестиваль" src="./images/festival.jpg">
                 <div class="description">
                     <h2 class="description__title">Фестиваль</h2>
-                    <div class="description__like"></div>
+                    <button type="button" class="description__like"></button>
                 </div>
             </article>
             <article class="place">
                 <img class="place__image" alt="ГУМ" src="./images/gum.jpg">
                 <div class="description">
                     <h2 class="description__title">ГУМ Красная площадь</h2>
-                    <div class="description__like"></div>
+                    <button type="button" class="description__like"></button>
                 </div>
             </article>
             <article class="place">
                 <img class="place__image" alt="Исакиевский собор" src="./images/isakievskiy.jpg">
                 <div class="description">
                     <h2 class="description__title">Исакиевский собор</h2>
-                    <div class="description__like"></div>
+                    <button type="button" class="description__like"></button>
                 </div>
             </article>
             <article class="place">
                 <img class="place__image" alt="Казань мечеть" src="./images/kazayn.jpg">
                 <div class="description">
                     <h2 class="description__title">Казань мечеть</h2>
-                    <div class="description__like"></div>
+                    <button type="button" class="description__like"></button>
                 </div>
             </article>
             <article class="place">
                 <img class="place__image" alt="Ольхон" src="./images/olkhon.jpg">
                 <div class="description">
                     <h2 class="description__title">Ольхон</h2>
-                    <div class="description__like"></div>
+                    <button type="button" class="description__like"></button>
                 </div>
             </article>
         </section>
@@ -85,16 +85,16 @@
 <div class="popup">
     <div class="popup__container">
         <button class="popup__close-button"></button>
-        <section class="popup__content">
+        <div class="popup__content">
             <h3 class="popup__title">Редактировать профиль</h3>
-            <form class="popup__form">
-                <input type="text" placeholder="Имя" class="popup__form-name" value="Жак-Ив Кусто">
-                <input type="text" placeholder="О себе" class="popup__form-profession" value="Исследователь океана">
+            <form class="popup__form" method="post" name="profileForm">
+                <input name="profileFormName" type="text" placeholder="Имя" class="popup__form-name">
+                <input name="profileFormProfession" type="text" placeholder="О себе" class="popup__form-profession">
                 <button type="submit" class="popup__form-submit-btn">
                     Сохранить
                 </button>
             </form>
-        </section>
+        </div>
     </div>
 </div>
 <script src="./scripts/index.js"></script>

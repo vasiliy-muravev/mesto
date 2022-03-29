@@ -7,4 +7,10 @@
     background-size: cover;
     cursor: pointer;
     margin-right: 30px;
+    border: none;
+    background-color: #fff;
+}
+
+.description__like:hover {
+    opacity: 0.5;
 }
