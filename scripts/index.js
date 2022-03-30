@@ -2,7 +2,6 @@
 const popupElement = document.querySelector('.popup');
 const redactButton = document.querySelector('.info__redact-button');
 const closeButton = popupElement.querySelector('.popup__close-button');
-const ESC_KEY = "Escape";
 
 /* Форма */
 const form = popupElement.querySelector('.popup__form');
