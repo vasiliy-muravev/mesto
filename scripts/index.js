@@ -6,10 +6,54 @@ const closeButton = popupElement.querySelector('.popup__close-button');
 /* Форма */
 const form = popupElement.querySelector('.popup__form');
 /* Поля формы */
-let nameInput = popupElement.querySelector('.popup__form-name');
-let jobInput = popupElement.querySelector('.popup__form-profession');
-let infoTitle = document.querySelector('.info__title');
-let infoSubtitle = document.querySelector('.info__subtitle');
+const nameInput = popupElement.querySelector('.popup__form-name');
+const jobInput = popupElement.querySelector('.popup__form-profession');
+const infoTitle = document.querySelector('.info__title');
+const infoSubtitle = document.querySelector('.info__subtitle');
+
+const initialCards = [
+    {
+        name: 'Архыз',
+        link: './images/arkhyz.jpg'
+    },
+    {
+        name: 'Фестиваль',
+        link: './images/festival.jpg'
+    },
+    {
+        name: 'ГУМ Красная площадь',
+        link: './images/gum.jpg'
+    },
+    {
+        name: 'Исаакиевский собор',
+        link: './images/isakievskiy.jpg'
+    },
+    {
+        name: 'Казань мечеть',
+        link: './images/kazayn.jpg'
+    },
+    {
+        name: 'Ольхон',
+        link: './images/olkhon.jpg'
+    }
+];
+
+/* Шаблон карточки места */
+const addPlace = (name, link) => {
+    const placeContainer = document.querySelector('.places');
+    const placeTemplate = document.querySelector('#place-template').content;
+    const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
+    placeElement.querySelector('.place__image').src = link;
+    placeElement.querySelector('.place__image').alt = name;
+    placeElement.querySelector('.description__title').textContent = name;
+    placeContainer.prepend(placeElement);
+};
+
+/* Шесть карточек «из коробки» */
+initialCards.forEach(function (item) {
+    addPlace(item.name, item.link);
+});
+
 
 /* Обработчик «отправки» формы */
 function formSubmitHandler(event) {
@@ -36,3 +80,5 @@ closeButton.addEventListener('click', popupToggle);
 
 /* Отправка формы */
 form.addEventListener('submit', formSubmitHandler);
+
+/* */
