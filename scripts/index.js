@@ -101,7 +101,7 @@ function likeToggle(button) {
 
 /* Форма профиля пользователя */
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
-redactButton.addEventListener('click',  () => popupToggle(profileFormPopup));
+redactButton.addEventListener('click', () => popupToggle(profileFormPopup));
 /* Закрыть попап формы профиля пользователя на крестик */
 closeProfileButton.addEventListener('click', () => popupToggle(profileFormPopup));
 /* Отправка формы */
@@ -110,13 +110,20 @@ profileForm.addEventListener('submit', formSubmitProfile);
 
 /* Попап формы добавления места */
 /* Открыть попап формы добавления места */
-addPlaceButton.addEventListener('click',  () => popupToggle(placeFormPopup));
+addPlaceButton.addEventListener('click', () => popupToggle(placeFormPopup));
 /* Закрыть попап формы добавления места на крестик */
-closePlaceButton.addEventListener('click',  () => popupToggle(placeFormPopup));
+closePlaceButton.addEventListener('click', () => popupToggle(placeFormPopup));
 /* Отправка формы */
 placeForm.addEventListener('submit', formSubmitPlace);
 /* Лайк */
-document.addEventListener('click',event => event.target.classList.toggle('description__like_active'))
+document.addEventListener('click', event => {
+    if (event.target.classList.contains('description__like')) {
+        event.target.classList.toggle('description__like_active');
+    }
+    if (event.target.classList.contains('description__delete')) {
+        event.target.closest('.place').remove();
+    }
+});
 
 /* Попап фотографии */
 
