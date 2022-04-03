@@ -20,7 +20,8 @@ const placeNameInput = placeFormPopup.querySelector('.popup__form-name');
 const placeLinkInput = placeFormPopup.querySelector('.popup__form-additional');
 
 /* Элементы попапа с фотографиями */
-
+const picturePopup = document.querySelector('#picturePopup');
+const image = document.querySelectorAll('.place__image');
 
 /* Стартовый набор мест */
 const initialCards = [
@@ -120,13 +121,21 @@ document.addEventListener('click', event => {
     if (event.target.classList.contains('description__like')) {
         event.target.classList.toggle('description__like_active');
     }
+});
+/* Удаление места */
+document.addEventListener('click', event => {
     if (event.target.classList.contains('description__delete')) {
         event.target.closest('.place').remove();
     }
 });
 
 /* Попап фотографии */
-
+/* Открыть попап c картинкой */
+document.addEventListener('click', event => {
+    if (event.target.classList.contains('place__image')) {
+        popupToggle(picturePopup);
+    }
+});
 
 
 

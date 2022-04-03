@@ -1,0 +1,7 @@
+.popup__picture-container {
+    display: flex;
+    align-items: center;
+    margin-left: calc(25vw - 215px);
+    margin-top: calc(25vh - 165px);
+    position: inherit;
+}
