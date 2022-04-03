@@ -43,3 +43,4 @@ git clone https://github.com/vasiliy-muravev/mesto.git
 - grid
 - js
 - BEM methodology
+- js arrow functions and function expressions
