@@ -25,7 +25,7 @@
                 <button type="button" class="info__redact-button"></button>
                 <p class="info__subtitle">Исследователь океана</p>
             </div>
-            <button type="button" class="profile__add-button"></button>
+            <button type="button" class="place__add-place-button"></button>
         </section>
 
         <section class="places">
@@ -39,7 +39,7 @@
 
 </div>
 
-<div class="popup">
+<div class="popup" id="profileFormPopup">
     <div class="popup__container">
         <button type="button" class="popup__close-button"></button>
         <div class="popup__content">
@@ -47,6 +47,22 @@
             <form class="popup__form" method="post" name="profileForm">
                 <input name="profileFormName" type="text" placeholder="Имя" class="popup__form-name">
                 <input name="profileFormProfession" type="text" placeholder="О себе" class="popup__form-profession">
+                <button type="submit" class="popup__form-submit-btn">
+                    Сохранить
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="popup" id="placeFormPopup">
+    <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+        <div class="popup__content">
+            <h3 class="popup__title">Новое место</h3>
+            <form class="popup__form" method="post" name="placeForm">
+                <input name="placeFormName" type="text" placeholder="Название" class="popup__form-name">
+                <input name="placeFormLink" type="text" placeholder="Ссылка на картинку" class="popup__form-profession">
                 <button type="submit" class="popup__form-submit-btn">
                     Сохранить
                 </button>
