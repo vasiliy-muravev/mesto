@@ -21,7 +21,7 @@ const placeLinkInput = placeFormPopup.querySelector('.popup__form-additional');
 
 /* Элементы попапа с фотографиями */
 const picturePopup = document.querySelector('#picturePopup');
-const image = document.querySelectorAll('.place__image');
+const closePictureButton = picturePopup.querySelector('.popup__close-button');
 
 /* Стартовый набор мест */
 const initialCards = [
@@ -67,6 +67,11 @@ initialCards.forEach(function (item) {
     addPlace(item.name, item.link);
 });
 
+const addPicture = (name, link) => {
+    picturePopup.querySelector('.popup__big-picture').src = link;
+    picturePopup.querySelector('.popup__big-picture').alt = name;
+    picturePopup.querySelector('.popup__picture-title').textContent = name;
+}
 
 /* Обработчик «отправки» формы профиля пользователя */
 function formSubmitProfile(event) {
@@ -75,7 +80,6 @@ function formSubmitProfile(event) {
     infoSubtitle.textContent = jobInput.value;
     popupToggle(profileFormPopup);
 }
-
 
 /* Обработчик «отправки» формы добавления места */
 function formSubmitPlace(event) {
@@ -99,6 +103,7 @@ function popupToggle(thisPopup) {
 function likeToggle(button) {
     button.classList.toggle('description__like_active');
 }
+
 
 /* Форма профиля пользователя */
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
@@ -129,13 +134,17 @@ document.addEventListener('click', event => {
     }
 });
 
+
 /* Попап фотографии */
 /* Открыть попап c картинкой */
 document.addEventListener('click', event => {
     if (event.target.classList.contains('place__image')) {
+        addPicture(event.target.alt, event.target.src);
         popupToggle(picturePopup);
     }
 });
+/* Закрыть попап с картинкой на крестик */
+closePictureButton.addEventListener('click', () => popupToggle(picturePopup));
 
 
 
