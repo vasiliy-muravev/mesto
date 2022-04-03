@@ -13,7 +13,7 @@ const profileForm = document.forms.profileForm;
 
 /* Элементы попапа формы добавления места */
 const placeFormPopup = document.querySelector('#placeFormPopup');
-const addPlaceButton = document.querySelector('.place__add-place-button');
+const addPlaceButton = document.querySelector('.place__add-place');
 const closePlaceButton = placeFormPopup.querySelector('.popup__close-button');
 const placeForm = document.forms.placeForm;
 const placeNameInput = placeFormPopup.querySelector('.popup__form-name');

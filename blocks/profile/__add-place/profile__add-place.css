@@ -1,4 +1,4 @@
-.place__add-place-button {
+.place__add-place {
     background-image: url(../../../images/add_button.svg);
     background-color: #000;
     background-repeat: no-repeat;
@@ -12,18 +12,18 @@
     margin-left: auto;
 }
 
-.place__add-place-button:hover {
+.place__add-place:hover {
     opacity: 0.6;
 }
 
 @media screen and (max-width: 1070px) {
-    .place__add-place-button {
+    .place__add-place {
         margin-left: unset;
     }
 }
 
 @media screen and (max-width: 860px) {
-    .place__add-place-button {
+    .place__add-place {
         background-image: url(../../../images/add_button_wide.svg);
         height: 50px;
         width: 282px;
