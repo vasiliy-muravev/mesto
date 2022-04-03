@@ -6,7 +6,7 @@ const closeProfileButton = popupElement.querySelector('.popup__close-button');
 /* Элементы попапа формы профиля пользователя */
 const profileFormPopup = document.querySelector('#profileFormPopup');
 const nameInput = popupElement.querySelector('.popup__form-name');
-const jobInput = popupElement.querySelector('.popup__form-profession');
+const jobInput = popupElement.querySelector('.popup__form-additional');
 const infoTitle = document.querySelector('.info__title');
 const infoSubtitle = document.querySelector('.info__subtitle');
 const profileForm = document.forms.profileForm;
@@ -17,7 +17,8 @@ const addPlaceButton = document.querySelector('.place__add-place-button');
 const closePlaceButton = placeFormPopup.querySelector('.popup__close-button');
 const placeForm = document.forms.placeForm;
 const placeNameInput = placeFormPopup.querySelector('.popup__form-name');
-const placeLinkInput = placeFormPopup.querySelector('.popup__form-profession');
+const placeLinkInput = placeFormPopup.querySelector('.popup__form-additional');
+
 /* Элементы попапа с фотографиями */
 
 
@@ -48,6 +49,7 @@ const initialCards = [
         link: './images/olkhon.jpg'
     }
 ];
+
 /* Добавить место используя шаблон карточки места */
 const addPlace = (name, link) => {
     const placeContainer = document.querySelector('.places');
@@ -58,6 +60,7 @@ const addPlace = (name, link) => {
     placeElement.querySelector('.description__title').textContent = name !== '' ? name : 'Нет названия';
     placeContainer.prepend(placeElement);
 };
+
 /* Добавляем шесть карточек «из коробки» */
 initialCards.forEach(function (item) {
     addPlace(item.name, item.link);
@@ -91,6 +94,10 @@ function popupToggle(thisPopup) {
     thisPopup.classList.toggle('popup_opened');
 }
 
+/* Лайк */
+function likeToggle(button) {
+    button.classList.toggle('description__like_active');
+}
 
 /* Форма профиля пользователя */
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
@@ -108,6 +115,9 @@ addPlaceButton.addEventListener('click',  () => popupToggle(placeFormPopup));
 closePlaceButton.addEventListener('click',  () => popupToggle(placeFormPopup));
 /* Отправка формы */
 placeForm.addEventListener('submit', formSubmitPlace);
+/* Лайк */
+document.addEventListener('click',event => event.target.classList.toggle('description__like_active'))
+
 /* Попап фотографии */
 
 
