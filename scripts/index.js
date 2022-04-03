@@ -9,11 +9,11 @@ const nameInput = popupElement.querySelector('.popup__form-name');
 const jobInput = popupElement.querySelector('.popup__form-additional');
 const infoTitle = document.querySelector('.info__title');
 const infoSubtitle = document.querySelector('.info__subtitle');
+const addPlaceButton = document.querySelector('.profile__add-place-button');
 const profileForm = document.forms.profileForm;
 
 /* Элементы попапа формы добавления места */
 const placeFormPopup = document.querySelector('#placeFormPopup');
-const addPlaceButton = document.querySelector('.place__add-place');
 const closePlaceButton = placeFormPopup.querySelector('.popup__close-button');
 const placeForm = document.forms.placeForm;
 const placeNameInput = placeFormPopup.querySelector('.popup__form-name');
