@@ -7,6 +7,7 @@
     white-space: nowrap;
     overflow: hidden;
     max-width: 294px;
+    min-width: 93px;
 }
 
 @media screen and (max-width: 1070px) {
@@ -14,5 +15,6 @@
         font-size: 27px;
         line-height: 1.22;
         max-width: 189px;
+        min-width: 143px;
     }
 }

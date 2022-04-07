@@ -21,6 +21,8 @@
 
 @media screen and (max-width: 560px) {
     .popup__picture-container {
-        margin-left: calc(25vw - 52px);
+        margin-left: 40px;
+        margin-right: 40px;
+        min-width: 240px;
     }
 }
