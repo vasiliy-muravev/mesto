@@ -1,6 +1,6 @@
 /* Элементы попапа формы профиля пользователя */
 const profileButtonRedact = document.querySelector('.info__redact-button');
-const profileFormPopup = document.querySelector('.popup__profile_form');
+const profileFormPopup = document.querySelector('.popup__profile');
 const profileNameInput = profileFormPopup.querySelector('.popup__form-name');
 const profileJobInput = profileFormPopup.querySelector('.popup__form-additional');
 const profileButtonClose = profileFormPopup.querySelector('.popup__close-button');
@@ -10,14 +10,14 @@ const profileButtonAdd = document.querySelector('.profile__add-place-button');
 const profileForm = document.forms.profileForm;
 
 /* Элементы попапа формы добавления места */
-const placeFormPopup = document.querySelector('.popup__place_form');
+const placeFormPopup = document.querySelector('.popup__place');
 const placeButtonClose = placeFormPopup.querySelector('.popup__close-button');
 const placeForm = document.forms.placeForm;
 const placeNameInput = placeFormPopup.querySelector('.popup__form-name');
 const placeLinkInput = placeFormPopup.querySelector('.popup__form-additional');
 
 /* Элементы попапа с фотографиями */
-const picturePopup = document.querySelector('.popup__picture_popup');
+const picturePopup = document.querySelector('.popup__picture');
 const pictureButtonClose = picturePopup.querySelector('.popup__close-button');
 const pictureBig = picturePopup.querySelector('.popup__big-picture');
 const pictureTitle = picturePopup.querySelector('.popup__picture-title');
