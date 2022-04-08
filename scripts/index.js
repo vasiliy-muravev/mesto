@@ -41,8 +41,8 @@ const addPlace = (name, link) => {
     placeDelete.addEventListener('click', event => {
         event.target.closest('.place').remove();
     });
-    placeImage.addEventListener('click', event => {
-        addPicture(event.target.alt, event.target.src);
+    placeImage.addEventListener('click', () => {
+        addPicture(name, link);
         openPopup(picturePopup);
     });
     return placeElement;
@@ -78,8 +78,6 @@ function formSubmitPlace(event) {
 
 /* Открытие */
 function openPopup(popup) {
-    profileNameInput.value = profileInfoTitle.innerHTML;
-    profileJobInput.value = profileInfoSubtitle.innerHTML;
     popup.classList.add('popup_opened');
 }
 
@@ -96,7 +94,11 @@ function likeToggle(button) {
 
 /* Форма профиля пользователя */
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
-profileButtonRedact.addEventListener('click', () => openPopup(profileFormPopup));
+profileButtonRedact.addEventListener('click', () => {
+    profileNameInput.value = profileInfoTitle.innerHTML;
+    profileJobInput.value = profileInfoSubtitle.innerHTML;
+    openPopup(profileFormPopup);
+});
 /* Закрыть попап формы профиля пользователя на крестик */
 profileButtonClose.addEventListener('click', () => closePopup(profileFormPopup));
 /* Отправка формы */
