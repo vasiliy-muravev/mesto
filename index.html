@@ -45,9 +45,15 @@
         <div class="popup__content">
             <h3 class="popup__title">Редактировать профиль</h3>
             <form class="popup__form" method="post" name="profileForm">
-                <input name="profileFormName" type="text" placeholder="Имя" class="popup__form-name">
-                <input name="profileFormProfession" type="text" placeholder="О себе" class="popup__form-additional">
-                <button type="submit" class="popup__form-submit-btn">
+                <input name="profileFormName" type="text" placeholder="Имя"
+                       class="popup__form-name popup__form-name_error"
+                       minlength="2" maxlength="40">
+                <span class="popup__form-input-error name-input-error">Вы пропустили это поле</span>
+                <input name="profileFormProfession" type="text" placeholder="О себе"
+                       class="popup__form-additional popup__form-additional_error"
+                       minlength="2" maxlength="200">
+                <span class="popup__form-input-error profession-input-error">Вы пропустили это поле</span>
+                <button type="submit" class="popup__form-submit-btn popup__form-submit-btn_disabled">
                     Сохранить
                 </button>
             </form>
@@ -62,7 +68,9 @@
             <h3 class="popup__title">Новое место</h3>
             <form class="popup__form" method="post" name="placeForm">
                 <input name="placeFormName" type="text" placeholder="Название" class="popup__form-name">
+                <span class="popup__form-input-error place-name-input-error"></span>
                 <input name="placeFormLink" type="text" placeholder="Ссылка на картинку" class="popup__form-additional">
+                <span class="popup__form-input-error url-input-error"></span>
                 <button type="submit" class="popup__form-submit-btn">
                     Сохранить
                 </button>
@@ -94,5 +102,6 @@
 
 <script src="./scripts/card.js"></script>
 <script src="./scripts/index.js"></script>
+<script src="./scripts/validate.js"></script>
 </body>
 </html>
