@@ -46,14 +46,16 @@
             <h3 class="popup__title">Редактировать профиль</h3>
             <form class="popup__form" method="post" name="profileForm">
                 <input name="profileFormName" type="text" placeholder="Имя"
-                       class="popup__form-name popup__form-name_error"
-                       minlength="2" maxlength="40">
-                <span class="popup__form-input-error name-input-error">Вы пропустили это поле</span>
+                       class="popup__form-input popup__form-name"
+                       minlength="2" maxlength="40"
+                       id="profile-name-input" required>
+                <span class="popup__form-input-error profile-name-input-error"></span>
                 <input name="profileFormProfession" type="text" placeholder="О себе"
-                       class="popup__form-additional popup__form-additional_error"
-                       minlength="2" maxlength="200">
-                <span class="popup__form-input-error profession-input-error">Вы пропустили это поле</span>
-                <button type="submit" class="popup__form-submit-btn popup__form-submit-btn_disabled">
+                       class="popup__form-input popup__form-additional"
+                       minlength="2" maxlength="200"
+                       id="profile-profession-input" required>
+                <span class="popup__form-input-error profile-profession-input-error"></span>
+                <button type="submit" class="popup__form-submit-btn">
                     Сохранить
                 </button>
             </form>
@@ -66,11 +68,14 @@
         <button type="button" class="popup__close-button"></button>
         <div class="popup__content">
             <h3 class="popup__title">Новое место</h3>
-            <form class="popup__form" method="post" name="placeForm">
-                <input name="placeFormName" type="text" placeholder="Название" class="popup__form-name">
+            <form class="popup__form" method="post" name="placeForm" novalidate>
+                <input name="placeFormName" type="text" placeholder="Название"
+                       class="popup__form-input popup__form-name"
+                       minlength="2" maxlength="30" id="place-name-input" required>
                 <span class="popup__form-input-error place-name-input-error"></span>
-                <input name="placeFormLink" type="text" placeholder="Ссылка на картинку" class="popup__form-additional">
-                <span class="popup__form-input-error url-input-error"></span>
+                <input name="placeFormLink" type="url" placeholder="Ссылка на картинку"
+                       class="popup__form-input popup__form-additional" id="place-url-input" required>
+                <span class="popup__form-input-error place-url-input-error"></span>
                 <button type="submit" class="popup__form-submit-btn">
                     Сохранить
                 </button>

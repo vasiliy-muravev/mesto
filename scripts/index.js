@@ -26,6 +26,16 @@ const pictureTitle = picturePopup.querySelector('.popup__picture-title');
 const placeContainer = document.querySelector('.places');
 const placeTemplate = document.querySelector('#place-template').content.querySelector('.place');
 
+/* Настройки классов формы */
+const validationConfig = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__form-input",
+    submitButtonSelector: ".popup__form-submit-btn",
+    inactiveButtonClass: "popup__form-submit-btn_disabled",
+    inputErrorClass: "popup__form-input_error",
+    errorClass: "popup__form-input-error_visible",
+};
+
 /* Добавить место используя шаблон карточки места */
 const addPlace = (name, link) => {
     const placeElement = placeTemplate.cloneNode(true);
@@ -76,14 +86,23 @@ function formSubmitPlace(event) {
     closePopup(placeFormPopup);
 }
 
+/* Закрытие попапов нажатием на Esc */
+function closeOnEsc(evt) {
+    if (evt.key === 'Escape') {
+        this.popup.classList.remove('popup_opened');
+    }
+}
+
 /* Открытие */
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', {handleEvent: closeOnEsc, popup: popup});
 }
 
 /* Закрытие попапа */
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', {handleEvent: closeOnEsc, popup: popup});
 }
 
 /* Лайк */
@@ -91,13 +110,27 @@ function likeToggle(button) {
     button.classList.toggle('description__like_active');
 }
 
+/* Закрытие попапа кликом на оверлей */
+function closeOnMissClick(evt) {
+    if (evt.target.classList.contains('popup_opened')) {
+        evt.target.classList.remove('popup_opened');
+    }
+}
 
 /* Форма профиля пользователя */
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
 profileButtonRedact.addEventListener('click', () => {
-    profileNameInput.value = profileInfoTitle.innerHTML;
-    profileJobInput.value = profileInfoSubtitle.innerHTML;
+    profileNameInput.value = profileInfoTitle.textContent;
+    profileJobInput.value = profileInfoSubtitle.textContent;
     openPopup(profileFormPopup);
+
+    /* При открытии формы валидируем поля, там как они заполняются у нас через js и изначально не валидны */
+    const inputList = Array.from(profileForm.querySelectorAll(validationConfig.inputSelector));
+    const buttonElement = profileForm.querySelector(validationConfig.submitButtonSelector);
+    inputList.forEach((inputElement) => {
+        checkInputValidity(profileForm, inputElement, validationConfig);
+        toggleButtonState(inputList, buttonElement, validationConfig);
+    });
 });
 /* Закрыть попап формы профиля пользователя на крестик */
 profileButtonClose.addEventListener('click', () => closePopup(profileFormPopup));
@@ -117,3 +150,6 @@ placeForm.addEventListener('submit', formSubmitPlace);
 /* Попап фотографии */
 /* Закрыть попап с картинкой на крестик */
 pictureButtonClose.addEventListener('click', () => closePopup(picturePopup));
+
+/* Закрытие попапов кликом на оверлей */
+document.addEventListener('mousedown', closeOnMissClick);
