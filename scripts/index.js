@@ -3,7 +3,6 @@ const profileButtonRedact = document.querySelector('.info__redact-button');
 const profileFormPopup = document.querySelector('.popup_profile');
 const profileNameInput = profileFormPopup.querySelector('.popup__form-name');
 const profileJobInput = profileFormPopup.querySelector('.popup__form-additional');
-const profileButtonClose = profileFormPopup.querySelector('.popup__close-button');
 const profileInfoTitle = document.querySelector('.info__title');
 const profileInfoSubtitle = document.querySelector('.info__subtitle');
 const profileButtonAdd = document.querySelector('.profile__add-place-button');
@@ -11,14 +10,12 @@ const profileForm = document.forms.profileForm;
 
 /* Элементы попапа формы добавления места */
 const placeFormPopup = document.querySelector('.popup_place');
-const placeButtonClose = placeFormPopup.querySelector('.popup__close-button');
 const placeForm = document.forms.placeForm;
 const placeNameInput = placeFormPopup.querySelector('.popup__form-name');
 const placeLinkInput = placeFormPopup.querySelector('.popup__form-additional');
 
 /* Элементы попапа с фотографиями */
 const picturePopup = document.querySelector('.popup_picture');
-const pictureButtonClose = picturePopup.querySelector('.popup__close-button');
 const pictureBig = picturePopup.querySelector('.popup__big-picture');
 const pictureTitle = picturePopup.querySelector('.popup__picture-title');
 
@@ -36,6 +33,9 @@ const validationConfig = {
     errorClass: "popup__form-input-error_visible",
 };
 
+/* Выбрать все попапы */
+const popups = document.querySelectorAll('.popup');
+``
 /* Добавить место используя шаблон карточки места */
 const addPlace = (name, link) => {
     const placeElement = placeTemplate.cloneNode(true);
@@ -70,7 +70,7 @@ const addPicture = (name, link) => {
 }
 
 /* Обработчик «отправки» формы профиля пользователя */
-function formSubmitProfile(event) {
+function handleProfileFormSubmit(event) {
     event.preventDefault();
     profileInfoTitle.textContent = profileNameInput.value;
     profileInfoSubtitle.textContent = profileJobInput.value;
@@ -78,7 +78,7 @@ function formSubmitProfile(event) {
 }
 
 /* Обработчик «отправки» формы добавления места */
-function formSubmitPlace(event) {
+function handlePlaceFormSubmit(event) {
     event.preventDefault();
     placeContainer.prepend(addPlace(placeNameInput.value, placeLinkInput.value));
     placeNameInput.value = '';
@@ -87,22 +87,23 @@ function formSubmitPlace(event) {
 }
 
 /* Закрытие попапов нажатием на Esc */
-function closeOnEsc(evt) {
+function closeByEscape(evt) {
     if (evt.key === 'Escape') {
-        this.popup.classList.remove('popup_opened');
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
     }
 }
 
 /* Открытие */
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', {handleEvent: closeOnEsc, popup: popup});
+    document.addEventListener('keydown', closeByEscape);
 }
 
 /* Закрытие попапа */
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', {handleEvent: closeOnEsc, popup: popup});
+    document.removeEventListener('keydown', closeByEscape);
 }
 
 /* Лайк */
@@ -110,12 +111,16 @@ function likeToggle(button) {
     button.classList.toggle('description__like_active');
 }
 
-/* Закрытие попапа кликом на оверлей */
-function closeOnMissClick(evt) {
-    if (evt.target.classList.contains('popup_opened')) {
-        evt.target.classList.remove('popup_opened');
-    }
-}
+/* Если кликнули по оверлею или крестику любого из попапов - закрываем форму */
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened') ||
+            evt.target.classList.contains('popup__close-button')) {
+            closePopup(popup);
+        }
+    })
+})
+
 
 /* Форма профиля пользователя */
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
@@ -132,24 +137,13 @@ profileButtonRedact.addEventListener('click', () => {
         toggleButtonState(inputList, buttonElement, validationConfig);
     });
 });
-/* Закрыть попап формы профиля пользователя на крестик */
-profileButtonClose.addEventListener('click', () => closePopup(profileFormPopup));
+
 /* Отправка формы */
-profileForm.addEventListener('submit', formSubmitProfile);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 /* Попап формы добавления места */
 /* Открыть попап формы добавления места */
 profileButtonAdd.addEventListener('click', () => openPopup(placeFormPopup));
-/* Закрыть попап формы добавления места на крестик */
-placeButtonClose.addEventListener('click', () => closePopup(placeFormPopup));
 /* Отправка формы */
-placeForm.addEventListener('submit', formSubmitPlace);
-
-
-/* Попап фотографии */
-/* Закрыть попап с картинкой на крестик */
-pictureButtonClose.addEventListener('click', () => closePopup(picturePopup));
-
-/* Закрытие попапов кликом на оверлей */
-document.addEventListener('mousedown', closeOnMissClick);
+placeForm.addEventListener('submit', handlePlaceFormSubmit);
