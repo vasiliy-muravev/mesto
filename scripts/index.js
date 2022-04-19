@@ -42,9 +42,9 @@ const addPlace = (name, link) => {
     const placeImage = placeElement.querySelector('.place__image');
     const placeLike = placeElement.querySelector('.description__like');
     const placeDelete = placeElement.querySelector('.description__delete');
-    placeImage.src = link !== '' ? link : './images/no-photo.jpg';
-    placeImage.alt = name !== '' ? name : '';
-    placeElement.querySelector('.description__title').textContent = name !== '' ? name : 'Нет названия';
+    placeImage.src = link;
+    placeImage.alt = name;
+    placeElement.querySelector('.description__title').textContent = name;
     placeLike.addEventListener('click', event => {
         event.target.classList.toggle('description__like_active');
     });
@@ -128,22 +128,21 @@ profileButtonRedact.addEventListener('click', () => {
     profileNameInput.value = profileInfoTitle.textContent;
     profileJobInput.value = profileInfoSubtitle.textContent;
     openPopup(profileFormPopup);
-
-    /* При открытии формы валидируем поля, там как они заполняются у нас через js и изначально не валидны */
-    const inputList = Array.from(profileForm.querySelectorAll(validationConfig.inputSelector));
-    const buttonElement = profileForm.querySelector(validationConfig.submitButtonSelector);
-    inputList.forEach((inputElement) => {
-        checkInputValidity(profileForm, inputElement, validationConfig);
-        toggleButtonState(inputList, buttonElement, validationConfig);
-    });
 });
-
 /* Отправка формы */
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 /* Попап формы добавления места */
 /* Открыть попап формы добавления места */
-profileButtonAdd.addEventListener('click', () => openPopup(placeFormPopup));
+profileButtonAdd.addEventListener('click', () => {
+    openPopup(placeFormPopup);
+    /* При открытии формы валидируем поля, там как они изначально пустые и не валидны */
+    const inputList = Array.from(placeForm.querySelectorAll(validationConfig.inputSelector));
+    const buttonElement = placeForm.querySelector(validationConfig.submitButtonSelector);
+    inputList.forEach((inputElement) => {
+        toggleButtonState(inputList, buttonElement, validationConfig);
+    });
+});
 /* Отправка формы */
 placeForm.addEventListener('submit', handlePlaceFormSubmit);

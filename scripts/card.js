@@ -5,7 +5,7 @@ const initialCards = [
         link: './images/arkhyz.jpg'
     },
     {
-        name: 'Фестиваль',
+        name: 'Фестиваль света',
         link: './images/festival.jpg'
     },
     {
@@ -17,7 +17,7 @@ const initialCards = [
         link: './images/isakievskiy.jpg'
     },
     {
-        name: 'Казань мечеть',
+        name: 'Мечеть Кул Шариф',
         link: './images/kazayn.jpg'
     },
     {
