@@ -17,9 +17,9 @@ const placeNameInput = placeFormPopup.querySelector('.popup__form-name');
 const placeLinkInput = placeFormPopup.querySelector('.popup__form-additional');
 
 /* Элементы попапа с фотографиями */
-const picturePopup = document.querySelector('.popup_picture');
-const pictureBig = picturePopup.querySelector('.popup__big-picture');
-const pictureTitle = picturePopup.querySelector('.popup__picture-title');
+// const picturePopup = document.querySelector('.popup_picture');
+// const pictureBig = picturePopup.querySelector('.popup__big-picture');
+// const pictureTitle = picturePopup.querySelector('.popup__picture-title');
 
 /* Шаблон карточки места */
 const placeContainer = document.querySelector('.places');
@@ -38,22 +38,19 @@ const validationConfig = {
 /* Выбрать все попапы */
 const popups = document.querySelectorAll('.popup');
 
-
-
-
-
 /* ОПП начало */
-const placeCard = new Card(placeTemplate);
-console.log(placeCard);
-
+/* Добавляем шесть карточек «из коробки» */
 initialCards.forEach(function (item) {
     const card = new Card(item, '#place-template');
     const cardElement = card.addCard();
     placeContainer.prepend(cardElement);
-
-
-    // placeContainer.prepend(addPlace(item.name, item.link));
 });
+
+
+
+
+
+
 
 
 
@@ -62,55 +59,54 @@ initialCards.forEach(function (item) {
 
 /* ОПП конец */
 
-
-
-
-
 /* Добавить место используя шаблон карточки места */
-const addPlace = (name, link) => {
-    const placeElement = placeTemplate.cloneNode(true);
-    const placeImage = placeElement.querySelector('.place__image');
-    const placeLike = placeElement.querySelector('.description__like');
-    const placeDelete = placeElement.querySelector('.description__delete');
-    placeImage.src = link;
-    placeImage.alt = name;
-    placeElement.querySelector('.description__title').textContent = name;
-    placeLike.addEventListener('click', event => {
-        event.target.classList.toggle('description__like_active');
-    });
-    placeDelete.addEventListener('click', event => {
-        event.target.closest('.place').remove();
-    });
-    placeImage.addEventListener('click', () => {
-        addPicture(name, link);
-        openPopup(picturePopup);
-    });
-    return placeElement;
-};
+// const addPlace = (name, link) => {
+//     const placeElement = placeTemplate.cloneNode(true);
+//     const placeImage = placeElement.querySelector('.place__image');
+//     const placeLike = placeElement.querySelector('.description__like');
+//     const placeDelete = placeElement.querySelector('.description__delete');
+//     placeImage.src = link;
+//     placeImage.alt = name;
+//     placeElement.querySelector('.description__title').textContent = name;
+//     placeLike.addEventListener('click', event => {
+//         event.target.classList.toggle('description__like_active');
+//     });
+//     placeDelete.addEventListener('click', event => {
+//         event.target.closest('.place').remove();
+//     });
+//     placeImage.addEventListener('click', () => {
+//         addPicture(name, link);
+//         openPopup(picturePopup);
+//     });
+//     return placeElement;
+// };
 
 /* Добавляем шесть карточек «из коробки» */
-initialCards.forEach(function (item) {
-    placeContainer.prepend(addPlace(item.name, item.link));
-});
+// initialCards.forEach(function (item) {
+//     placeContainer.prepend(addPlace(item.name, item.link));
+// });
 
-const addPicture = (name, link) => {
-    pictureBig.src = link;
-    pictureBig.alt = name;
-    pictureTitle.textContent = name;
-}
+// const addPicture = (name, link) => {
+//     pictureBig.src = link;
+//     pictureBig.alt = name;
+//     pictureTitle.textContent = name;
+// }
 
 /* Обработчик «отправки» формы профиля пользователя */
-function handleProfileFormSubmit(event) {
-    event.preventDefault();
+function handleProfileFormSubmit(evt) {
+    evt.preventDefault();
     profileInfoTitle.textContent = profileNameInput.value;
     profileInfoSubtitle.textContent = profileJobInput.value;
     closePopup(profileFormPopup);
 }
 
 /* Обработчик «отправки» формы добавления места */
-function handlePlaceFormSubmit(event) {
-    event.preventDefault();
-    placeContainer.prepend(addPlace(placeNameInput.value, placeLinkInput.value));
+function handlePlaceFormSubmit(evt) {
+    evt.preventDefault();
+    const data = Object.fromEntries(new FormData(evt.target));
+    const card = new Card(data, '#place-template');
+    const cardElement = card.addCard();
+    placeContainer.prepend(cardElement);
     placeNameInput.value = '';
     placeLinkInput.value = '';
     closePopup(placeFormPopup);
@@ -125,13 +121,13 @@ function closeByEscape(evt) {
 }
 
 /* Открытие */
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
 }
 
 /* Закрытие попапа */
-function closePopup(popup) {
+export function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeByEscape);
 }

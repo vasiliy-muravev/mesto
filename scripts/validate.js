@@ -1,4 +1,11 @@
-
+const validationConfig = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__form-input",
+    submitButtonSelector: ".popup__form-submit-btn",
+    inactiveButtonClass: "popup__form-submit-btn_disabled",
+    inputErrorClass: "popup__form-input_error",
+    errorClass: "popup__form-input-error_visible",
+};
 
 const showInputError = (formElement, inputElement, errorMessage, config) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
