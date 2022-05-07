@@ -1,3 +1,5 @@
+import { Card } from "./Card.js";
+
 /* Элементы попапа формы профиля пользователя */
 const profileButtonRedact = document.querySelector('.info__redact-button');
 const profileFormPopup = document.querySelector('.popup_profile');
@@ -35,7 +37,35 @@ const validationConfig = {
 
 /* Выбрать все попапы */
 const popups = document.querySelectorAll('.popup');
-``
+
+
+
+
+
+/* ОПП начало */
+const placeCard = new Card(placeTemplate);
+console.log(placeCard);
+
+initialCards.forEach(function (item) {
+    const card = new Card(item, '#place-template');
+    const cardElement = card.addCard();
+    placeContainer.prepend(cardElement);
+
+
+    // placeContainer.prepend(addPlace(item.name, item.link));
+});
+
+
+
+
+
+
+/* ОПП конец */
+
+
+
+
+
 /* Добавить место используя шаблон карточки места */
 const addPlace = (name, link) => {
     const placeElement = placeTemplate.cloneNode(true);
