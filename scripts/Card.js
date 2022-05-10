@@ -1,19 +1,11 @@
-import { openPopup, closePopup } from "./index.js";
+import { openPopup } from "./index.js";
 
 /* Элементы попапа с фотографиями */
 const picturePopup = document.querySelector('.popup_picture');
 const pictureBig = picturePopup.querySelector('.popup__big-picture');
 const pictureTitle = picturePopup.querySelector('.popup__picture-title');
-
-// /* Элементы попапа формы добавления места */
-// const placeFormPopup = document.querySelector('.popup_place');
-// const placeForm = document.forms.placeForm;
-// const placeNameInput = placeFormPopup.querySelector('.popup__form-name');
-// const placeLinkInput = placeFormPopup.querySelector('.popup__form-additional');
-//
-// /* Шаблон карточки места */
-// const placeContainer = document.querySelector('.places');
-// const placeTemplate = document.querySelector('#place-template').content.querySelector('.place');
+/* Шаблон карточки места */
+const placeTemplate = document.querySelector('#place-template').content.querySelector('.place');
 
 export class Card {
     _data;
@@ -35,19 +27,21 @@ export class Card {
         return this._card;
     }
 
-    _getTemplate() {
-        return document.querySelector(this._cardSelector).content.querySelector('.place').cloneNode(true);
+    /* Получить шаблон */
+    _getTemplate = () => {
+        return placeTemplate.cloneNode(true);
     }
 
-    _setEventListeners() {
+    _setEventListeners = () => {
         const placeImage = this._card.querySelector('.place__image');
         const placeLike = this._card.querySelector('.description__like');
         const placeDelete = this._card.querySelector('.description__delete');
         const picturePopup = document.querySelector('.popup_picture');
-
+        /* Лайк */
         placeLike.addEventListener('click', evt => {
             evt.target.classList.toggle('description__like_active');
         });
+        /* Удаление */
         placeDelete.addEventListener('click', evt => {
             evt.target.closest('.place').remove();
         });
@@ -57,7 +51,7 @@ export class Card {
         });
     }
 
-    _addPicture(name, link) {
+    _addPicture = (name, link) => {
         pictureBig.src = link;
         pictureBig.alt = name;
         pictureTitle.textContent = name;
