@@ -9,13 +9,13 @@
 @media screen and (max-width: 1279px) {
     .popup__picture-container {
         margin-left: calc(25vw - 141px);
+        margin-top: calc(50vh - 136px);
     }
 }
 
 @media screen and (max-width: 860px) {
     .popup__picture-container {
         margin-left: calc(25vw - 90px);
-        margin-top: calc(25vh - 136px);
     }
 }
 
