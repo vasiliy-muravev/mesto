@@ -1,5 +1,5 @@
 /* Стартовый набор мест */
-const initialCards = [
+export const initialCards = [
     {
         placeFormName: 'Архыз',
         placeFormLink: './images/arkhyz.jpg'

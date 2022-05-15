@@ -1,5 +1,6 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import { initialCards } from "./cardsData.js";
 
 /* Элементы попапа формы профиля пользователя */
 const profileButtonRedact = document.querySelector('.info__redact-button');
@@ -49,8 +50,9 @@ function handlePlaceFormSubmit(evt) {
     evt.preventDefault();
     const data = Object.fromEntries(new FormData(evt.target));
     placeContainer.prepend(getCard(data));
-    placeForm.reset();
     closePopup(placeFormPopup);
+    placeForm.reset();
+    placeFormValidator.toggleButtonState();
 }
 
 /* Закрытие попапов нажатием на Esc */
@@ -63,7 +65,6 @@ function closeByEscape(evt) {
 
 /* Открытие */
 export function openPopup(popup) {
-    placeFormValidator.enableValidation();
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
 }

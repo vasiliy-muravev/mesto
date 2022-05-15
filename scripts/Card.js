@@ -30,12 +30,11 @@ export class Card {
 
     /* Получить шаблон */
     _getTemplate = () => {
-        const placeTemplate = document.querySelector('#place-template').content.querySelector('.place');
+        const placeTemplate = document.querySelector(this._cardSelector).content.querySelector('.place');
         return placeTemplate.cloneNode(true);
     }
 
     _setEventListeners = () => {
-        const placeImage = this._cardImage;
         const placeLike = this._card.querySelector('.description__like');
         const placeDelete = this._card.querySelector('.description__delete');
         const picturePopup = document.querySelector('.popup_picture');
@@ -48,7 +47,7 @@ export class Card {
             this._card.remove();
             this._card = null;
         });
-        placeImage.addEventListener('click', () => {
+        this._cardImage.addEventListener('click', () => {
             this._addPicture(this._data.placeFormName, this._data.placeFormLink);
             openPopup(picturePopup);
         });
