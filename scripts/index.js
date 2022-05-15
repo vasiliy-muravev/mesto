@@ -14,15 +14,12 @@ const profileForm = document.forms.profileForm;
 /* Элементы попапа формы добавления места */
 const placeFormPopup = document.querySelector('.popup_place');
 const placeForm = document.forms.placeForm;
-const placeNameInput = placeFormPopup.querySelector('.popup__form-name');
-const placeLinkInput = placeFormPopup.querySelector('.popup__form-additional');
 
 /* Контейнер карточки места */
 const placeContainer = document.querySelector('.places');
 
 /* Настройки классов формы */
 const validationConfig = {
-    formSelector: ".popup__form",
     inputSelector: ".popup__form-input",
     submitButtonSelector: ".popup__form-submit-btn",
     inactiveButtonClass: "popup__form-submit-btn_disabled",
@@ -41,15 +38,18 @@ function handleProfileFormSubmit(evt) {
     closePopup(profileFormPopup);
 }
 
+/* Создание и наполнение данными разметки карточки */
+function getCard(data) {
+    const card = new Card(data, '#place-template');
+    return card.addCard();
+}
+
 /* Обработчик «отправки» формы добавления места */
 function handlePlaceFormSubmit(evt) {
     evt.preventDefault();
     const data = Object.fromEntries(new FormData(evt.target));
-    const card = new Card(data, '#place-template');
-    const cardElement = card.addCard();
-    placeContainer.prepend(cardElement);
-    placeNameInput.value = '';
-    placeLinkInput.value = '';
+    placeContainer.prepend(getCard(data));
+    placeForm.reset();
     closePopup(placeFormPopup);
 }
 
@@ -63,6 +63,7 @@ function closeByEscape(evt) {
 
 /* Открытие */
 export function openPopup(popup) {
+    placeFormValidator.enableValidation();
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
 }
@@ -83,13 +84,10 @@ popups.forEach((popup) => {
     })
 })
 
-
 /* Форма профиля пользователя */
 /* Добавляем шесть карточек «из коробки» */
 initialCards.forEach(function (item) {
-    const card = new Card(item, '#place-template');
-    const cardElement = card.addCard();
-    placeContainer.prepend(cardElement);
+    placeContainer.prepend(getCard(item));
 });
 
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
@@ -106,9 +104,13 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 /* Отправка формы */
 placeForm.addEventListener('submit', handlePlaceFormSubmit);
 
-/* Включение валидации вызовом enableValidation все настройки передаются при вызове */
-const profileFormValidator = new FormValidator(validationConfig, '.popup__form');
-profileFormValidator.enableValidation(validationConfig);
+/* Включение валидации профиля */
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
+profileFormValidator.enableValidation();
+
+/* Включение валидации места */
+const placeFormValidator = new FormValidator(validationConfig, placeForm);
+placeFormValidator.enableValidation();
 
 /* Открыть попап формы добавления места */
 profileButtonAdd.addEventListener('click', () => {
