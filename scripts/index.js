@@ -55,7 +55,7 @@ function handlePlaceFormSubmit(evt) {
     placeFormValidator.toggleButtonState();
 }
 
-/* Закрытие попапов нажатием на Esc */
+/* Закрытие попапов нажатием на Esc ++++++++++*/
 function closeByEscape(evt) {
     if (evt.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_opened');
@@ -63,19 +63,19 @@ function closeByEscape(evt) {
     }
 }
 
-/* Открытие */
+/* Открытие +++++++++++++*/
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
 }
 
-/* Закрытие попапа */
+/* Закрытие попапа +++++++++++++*/
 export function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeByEscape);
 }
 
-/* Если кликнули по оверлею или крестику любого из попапов - закрываем форму */
+/* Если кликнули по оверлею или крестику любого из попапов - закрываем форму +++++++++++*/
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains('popup_opened') ||
