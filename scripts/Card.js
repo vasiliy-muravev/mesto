@@ -53,6 +53,7 @@ export class Card {
         });
     }
 
+    /* TODO Перенесется в класс PopupWithImage */
     _addPicture = (name, link) => {
         pictureBig.src = link;
         pictureBig.alt = name;
