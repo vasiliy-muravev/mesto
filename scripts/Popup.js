@@ -1,5 +1,3 @@
-import {closePopup} from "./index";
-
 export class Popup {
     _popup;
     _popups;
@@ -8,12 +6,12 @@ export class Popup {
         this._popup = document.querySelector(popupSelector);
     }
 
-    open() {
+    open = () => {
         this._popup.classList.add('popup_opened');
         document.addEventListener('keydown', this._handleEscClose);
     }
 
-    close() {
+    close = () => {
         this._popup.classList.remove('popup_opened');
         document.removeEventListener('keydown', this._handleEscClose);
     }
@@ -39,7 +37,7 @@ export class Popup {
         }
     }
 
-    setEventListeners() {
+    setEventListeners = () => {
         this._popup.addEventListener('keydown', this._handleClickClose);
         this._popup.addEventListener('keydown', this._handleEscClose);
     }
