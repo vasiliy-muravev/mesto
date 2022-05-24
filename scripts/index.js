@@ -1,6 +1,7 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import { initialCards } from "./cardsData.js";
+import {PopupWithImage} from "./PopupWithImage.js";
 
 /* Элементы попапа формы профиля пользователя */
 const profileButtonRedact = document.querySelector('.info__redact-button');
@@ -41,7 +42,13 @@ function handleProfileFormSubmit(evt) {
 
 /* Создание и наполнение данными разметки карточки */
 function getCard(data) {
-    const card = new Card(data, '#place-template');
+    const card = new Card({
+        data: data,
+        handleCardClick: () => {
+            const popupWithImage = new PopupWithImage('.popup_picture');
+            popupWithImage.open(card._data);
+        }
+    }, '#place-template');
     return card.addCard();
 }
 

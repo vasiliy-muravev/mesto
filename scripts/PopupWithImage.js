@@ -1,4 +1,4 @@
-import {Popup} from "./Popup";
+import {Popup} from "./Popup.js";
 
 export class PopupWithImage extends Popup {
     _pictureBig;
@@ -10,9 +10,11 @@ export class PopupWithImage extends Popup {
         this._pictureTitle = document.querySelector('.popup__picture-title');
     }
 
-    open = (name, link) => {
-        this._pictureBig.src = link;
-        this._pictureBig.alt = name;
-        this._pictureTitle.textContent = name;
+    open = ({placeFormName, placeFormLink}) => {
+        this._pictureBig.src = placeFormLink;
+        this._pictureBig.alt = placeFormName;
+        this._pictureTitle.textContent = placeFormName;
+        this._popup.classList.add('popup_opened');
+        document.addEventListener('keydown', this._handleEscClose);
     }
 }

@@ -12,9 +12,10 @@ export class Card {
     _card;
     _cardImage;
 
-    constructor(data, cardSelector) {
+    constructor({data, handleCardClick}, cardSelector) {
         this._data = data;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     /* Добавить место используя шаблон карточки места */
@@ -48,15 +49,17 @@ export class Card {
             this._card = null;
         });
         this._cardImage.addEventListener('click', () => {
-            this._addPicture(this._data.placeFormName, this._data.placeFormLink);
-            openPopup(picturePopup);
+            this._handleCardClick(this._data.placeFormName, this._data.placeFormLink);
+
+            // this._addPicture(this._data.placeFormName, this._data.placeFormLink);
+            // openPopup(picturePopup);
         });
     }
 
     /* TODO Перенесется в класс PopupWithImage */
-    _addPicture = (name, link) => {
-        pictureBig.src = link;
-        pictureBig.alt = name;
-        pictureTitle.textContent = name;
-    }
+    // _addPicture = (name, link) => {
+    //     pictureBig.src = link;
+    //     pictureBig.alt = name;
+    //     pictureTitle.textContent = name;
+    // }
 }
