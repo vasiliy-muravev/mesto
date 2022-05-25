@@ -1,11 +1,3 @@
-// import { openPopup } from "./index.js";
-
-/* Элементы попапа с фотографиями */
-const picturePopup = document.querySelector('.popup_picture');
-const pictureBig = picturePopup.querySelector('.popup__big-picture');
-const pictureTitle = picturePopup.querySelector('.popup__picture-title');
-
-
 export class Card {
     _data;
     _cardSelector;
@@ -50,16 +42,6 @@ export class Card {
         });
         this._cardImage.addEventListener('click', () => {
             this._handleCardClick(this._data.placeFormName, this._data.placeFormLink);
-
-            // this._addPicture(this._data.placeFormName, this._data.placeFormLink);
-            // openPopup(picturePopup);
         });
     }
-
-    /* TODO Перенесется в класс PopupWithImage */
-    // _addPicture = (name, link) => {
-    //     pictureBig.src = link;
-    //     pictureBig.alt = name;
-    //     pictureTitle.textContent = name;
-    // }
 }
