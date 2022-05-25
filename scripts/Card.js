@@ -1,4 +1,4 @@
-import { openPopup } from "./index.js";
+// import { openPopup } from "./index.js";
 
 /* Элементы попапа с фотографиями */
 const picturePopup = document.querySelector('.popup_picture');

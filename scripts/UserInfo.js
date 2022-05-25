@@ -11,8 +11,8 @@ export class UserInfo {
     Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии */
     getUserInfo = () => {
         return {
-            profileFormName: this._nameElement.value,
-            profileFormProfession: this._aboutElement.value
+            profileFormName: this._nameElement.textContent,
+            profileFormProfession: this._aboutElement.textContent
         }
     }
 
