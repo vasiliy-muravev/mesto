@@ -1,7 +1,8 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-import { initialCards } from "./cardsData.js";
+import {Card} from "./Card.js";
+import {FormValidator} from "./FormValidator.js";
+import {initialCards} from "./cardsData.js";
 import {PopupWithImage} from "./PopupWithImage.js";
+import {Section} from "./Section.js";
 
 /* Элементы попапа формы профиля пользователя */
 const profileButtonRedact = document.querySelector('.info__redact-button');
@@ -92,11 +93,30 @@ popups.forEach((popup) => {
     })
 })
 
+
+
+
 /* Форма профиля пользователя */
 /* Добавляем шесть карточек «из коробки» */
-initialCards.forEach(function (item) {
-    placeContainer.prepend(getCard(item));
-});
+// initialCards.forEach(function (item) {
+//     placeContainer.prepend(getCard(item));
+// });
+
+const defaultCardList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const card = new Card({
+            data: item,
+        }, '#place-template');
+        return card.addCard();
+    }
+}, '.places');
+
+defaultCardList.renderItems();
+
+
+
+
 
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
 profileButtonRedact.addEventListener('click', () => {

@@ -5,19 +5,19 @@ export class Section {
         this._container = document.querySelector(containerSelector);
     }
 
-    _clear() {
+    _clear = () => {
         this._container.innerHTML = '';
     }
 
-    _renderer(element) {
+    addItem = (element) => {
         this._container.prepend(element);
     }
 
-    renderItems() {
+    renderItems = () => {
         this._clear();
 
         this._renderedItems.forEach(item => {
-            this._renderer(item);
+            this.addItem(this._renderer(item));
         });
     }
 }
