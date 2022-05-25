@@ -11,7 +11,7 @@ export class Popup {
         document.addEventListener('keydown', this._handleEscClose);
     }
 
-    close = () => {
+    close() {
         this._popup.classList.remove('popup_opened');
         document.removeEventListener('keydown', this._handleEscClose);
     }
@@ -37,8 +37,8 @@ export class Popup {
         }
     }
 
-    setEventListeners = () => {
-        this._popup.addEventListener('keydown', this._handleClickClose);
+    setEventListeners() {
+        this._popup.addEventListener('click', this._handleClickClose);
         this._popup.addEventListener('keydown', this._handleEscClose);
     }
 }

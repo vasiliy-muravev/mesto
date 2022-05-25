@@ -11,14 +11,15 @@ export class UserInfo {
     Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии */
     getUserInfo = () => {
         return {
-            name: this._nameElement.value,
-            about: this._aboutElement.value
+            profileFormName: this._nameElement.value,
+            profileFormProfession: this._aboutElement.value
         }
     }
 
     /* Принимает новые данные пользователя и добавляет их на страницу */
     setUserInfo = (data) => {
-        this._nameElement.value = data.name;
-        this._aboutElement.value = data.about;
+        console.log(data.target.profileFormName.value, data.target.profileFormProfession.value);
+        this._nameElement.textContent = data.target.profileFormName.value;
+        this._aboutElement.textContent = data.target.profileFormProfession.value;
     }
 }

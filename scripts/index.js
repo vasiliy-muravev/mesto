@@ -3,6 +3,8 @@ import {FormValidator} from "./FormValidator.js";
 import {initialCards} from "./cardsData.js";
 import {PopupWithImage} from "./PopupWithImage.js";
 import {Section} from "./Section.js";
+import {UserInfo} from "./UserInfo.js";
+import {PopupWithForm} from "./PopupWithForm.js";
 
 /* Элементы попапа формы профиля пользователя */
 const profileButtonRedact = document.querySelector('.info__redact-button');
@@ -34,12 +36,26 @@ const validationConfig = {
 const popups = document.querySelectorAll('.popup');
 
 /* Обработчик «отправки» формы профиля пользователя */
-function handleProfileFormSubmit(evt) {
-    evt.preventDefault();
-    profileInfoTitle.textContent = profileNameInput.value;
-    profileInfoSubtitle.textContent = profileJobInput.value;
-    closePopup(profileFormPopup);
-}
+// function handleProfileFormSubmit(evt) {
+//     evt.preventDefault();
+//     profileInfoTitle.textContent = profileNameInput.value;
+//     profileInfoSubtitle.textContent = profileJobInput.value;
+//     closePopup(profileFormPopup);
+// }
+/* Обработчик «отправки» формы профиля пользователя */
+const userInfo = new UserInfo('.info__title', '.info__subtitle');
+const popupWithForm = new PopupWithForm({
+        popupSelector: '.popup_profile',
+        handleFormSubmit: (data) => {
+            userInfo.setUserInfo(data);
+            popupWithForm.close();
+
+        }
+    }
+);
+popupWithForm.setEventListeners();
+
+
 
 /* Создание и наполнение данными разметки карточки */
 function getCard(data) {
@@ -94,8 +110,6 @@ popups.forEach((popup) => {
 })
 
 
-
-
 /* Форма профиля пользователя */
 /* Добавляем шесть карточек «из коробки» */
 // initialCards.forEach(function (item) {
@@ -115,9 +129,6 @@ const defaultCardList = new Section({
 defaultCardList.renderItems();
 
 
-
-
-
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
 profileButtonRedact.addEventListener('click', () => {
     profileNameInput.value = profileInfoTitle.textContent;
@@ -125,7 +136,7 @@ profileButtonRedact.addEventListener('click', () => {
     openPopup(profileFormPopup);
 });
 /* Отправка формы */
-profileForm.addEventListener('submit', handleProfileFormSubmit);
+// profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 /* Попап формы добавления места */
