@@ -44,17 +44,15 @@ const popups = document.querySelectorAll('.popup');
 // }
 /* Обработчик «отправки» формы профиля пользователя */
 const userInfo = new UserInfo('.info__title', '.info__subtitle');
-const popupWithForm = new PopupWithForm({
+const profilePopupWithForm = new PopupWithForm({
         popupSelector: '.popup_profile',
         handleFormSubmit: (data) => {
             userInfo.setUserInfo(data);
-            popupWithForm.close();
-
+            profilePopupWithForm.close();
         }
     }
 );
-popupWithForm.setEventListeners();
-
+profilePopupWithForm.setEventListeners();
 
 
 /* Создание и наполнение данными разметки карточки */
@@ -69,15 +67,49 @@ function getCard(data) {
     return card.addCard();
 }
 
+// const newCard = new Section({
+//     items: initialCards,
+//     renderer: (item) => {
+//         const card = new Card({
+//             data: item,
+//         }, '#place-template');
+//         return card.addCard();
+//     }
+// }, '.places');
+// newCard.renderItems();
 /* Обработчик «отправки» формы добавления места */
-function handlePlaceFormSubmit(evt) {
-    evt.preventDefault();
-    const data = Object.fromEntries(new FormData(evt.target));
-    placeContainer.prepend(getCard(data));
-    closePopup(placeFormPopup);
-    placeForm.reset();
-    placeFormValidator.toggleButtonState();
-}
+const placePopupWithForm = new PopupWithForm({
+        popupSelector: '.popup_place',
+        handleFormSubmit: (data) => {
+            const newCard = new Section({}, '.places');
+            const card = new Card({
+                data: ({
+                    placeFormName: data.target.placeFormName.value,
+                    placeFormLink: data.target.placeFormLink.value
+                }),
+                handleCardClick: () => {
+                    const popupWithImage = new PopupWithImage('.popup_picture');
+                    popupWithImage.open(card._data);
+                }
+            }, '#place-template');
+
+            newCard.addItem(card.addCard());
+            placePopupWithForm.close();
+            placeForm.reset();
+            placeFormValidator.toggleButtonState();
+        }
+    }
+);
+placePopupWithForm.setEventListeners();
+/* Обработчик «отправки» формы добавления места */
+// function handlePlaceFormSubmit(evt) {
+//     evt.preventDefault();
+//     const data = Object.fromEntries(new FormData(evt.target));
+//     placeContainer.prepend(getCard(data));
+//     closePopup(placeFormPopup);
+//     placeForm.reset();
+//     placeFormValidator.toggleButtonState();
+// }
 
 /* Закрытие попапов нажатием на Esc ++++++++++*/
 function closeByEscape(evt) {
@@ -110,17 +142,20 @@ popups.forEach((popup) => {
 })
 
 
-/* Форма профиля пользователя */
 /* Добавляем шесть карточек «из коробки» */
 // initialCards.forEach(function (item) {
 //     placeContainer.prepend(getCard(item));
 // });
-
+/* Добавляем шесть карточек «из коробки» */
 const defaultCardList = new Section({
     items: initialCards,
     renderer: (item) => {
         const card = new Card({
             data: item,
+            handleCardClick: () => {
+                const popupWithImage = new PopupWithImage('.popup_picture');
+                popupWithImage.open(card._data);
+            }
         }, '#place-template');
         return card.addCard();
     }
@@ -141,7 +176,7 @@ profileButtonRedact.addEventListener('click', () => {
 
 /* Попап формы добавления места */
 /* Отправка формы */
-placeForm.addEventListener('submit', handlePlaceFormSubmit);
+// placeForm.addEventListener('submit', handlePlaceFormSubmit);
 
 /* Включение валидации профиля */
 const profileFormValidator = new FormValidator(validationConfig, profileForm);

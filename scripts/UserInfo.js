@@ -18,7 +18,6 @@ export class UserInfo {
 
     /* Принимает новые данные пользователя и добавляет их на страницу */
     setUserInfo = (data) => {
-        console.log(data.target.profileFormName.value, data.target.profileFormProfession.value);
         this._nameElement.textContent = data.target.profileFormName.value;
         this._aboutElement.textContent = data.target.profileFormProfession.value;
     }
