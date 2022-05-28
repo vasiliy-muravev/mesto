@@ -2,26 +2,26 @@
 export const initialCards = [
     {
         placeFormName: 'Архыз',
-        placeFormLink: './images/arkhyz.jpg'
+        placeFormLink: require('../images/arkhyz.jpg')
     },
     {
         placeFormName: 'Фестиваль света',
-        placeFormLink: './images/festival.jpg'
+        placeFormLink: require('../images/festival.jpg')
     },
     {
         placeFormName: 'ГУМ Красная площадь',
-        placeFormLink: './images/gum.jpg'
+        placeFormLink: require('../images/gum.jpg')
     },
     {
         placeFormName: 'Исаакиевский собор',
-        placeFormLink: './images/isakievskiy.jpg'
+        placeFormLink: require('../images/isakievskiy.jpg')
     },
     {
         placeFormName: 'Мечеть Кул Шариф',
-        placeFormLink: './images/kazayn.jpg'
+        placeFormLink: require('../images/kazayn.jpg')
     },
     {
         placeFormName: 'Ольхон',
-        placeFormLink: './images/olkhon.jpg'
+        placeFormLink: require('../images/olkhon.jpg')
     }
 ];

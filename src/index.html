@@ -6,7 +6,6 @@
     <meta name="description" content="Проект третьего спринта Василия Муравьева на Яндекс.Практикуме">
     <meta name="keywords" content="html, css">
     <meta name="author" content="Василий Муравьев">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Место</title>
 </head>
 <body class="body">
@@ -19,7 +18,7 @@
     <main>
 
         <section class="profile">
-            <img alt="Жак-Ив Кусто" class="profile__avatar" src="./images/avatar.jpg">
+            <img alt="Жак-Ив Кусто" class="profile__avatar" src="<%=require('./images/avatar.jpg')%>">
             <div class="info">
                 <h1 class="info__title">Жак-Ив Кусто</h1>
                 <button type="button" class="info__redact-button"></button>
@@ -88,7 +87,7 @@
     <div class="popup__picture-container">
         <button type="button" class="popup__close-button"></button>
         <div class="popup__picture-content">
-            <img class="popup__big-picture" alt="" src="./images/no-photo.jpg">
+            <img class="popup__big-picture" alt="" src="<%=require('./images/no-photo.jpg')%>">
             <p class="popup__picture-title"></p>
         </div>
     </div>
@@ -97,7 +96,7 @@
 <template id="place-template">
     <article class="place">
         <button type="button" class="description__delete"></button>
-        <img class="place__image" alt="" src="./images/no-photo.jpg">
+        <img class="place__image" alt="" src="<%=require('./images/no-photo.jpg')%>">
         <div class="description">
             <h2 class="description__title"></h2>
             <button type="button" class="description__like"></button>
@@ -105,6 +104,5 @@
     </article>
 </template>
 
-<script type="module" src="./scripts/index.js"></script>
 </body>
 </html>
