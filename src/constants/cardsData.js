@@ -15,6 +15,7 @@ export const initialCards = [
     {
         placeFormName: 'Исаакиевский собор',
         placeFormLink: require('../images/isakievskiy.jpg')
+        // placeFormLink: ''
     },
     {
         placeFormName: 'Мечеть Кул Шариф',

@@ -6,6 +6,12 @@
     position: inherit;
 }
 
+@media screen and (max-width: 1400px) {
+    .popup__picture-container {
+        margin-top: 20vh;
+    }
+}
+
 @media screen and (max-width: 1279px) {
     .popup__picture-container {
         margin-left: calc(25vw - 141px);
