@@ -1,9 +1,4 @@
 export class Card {
-    _data;
-    _cardSelector;
-    _card;
-    _cardImage;
-
     constructor({data, handleCardClick}, cardSelector) {
         this._data = data;
         this._handleCardClick = handleCardClick;
@@ -27,21 +22,32 @@ export class Card {
         return placeTemplate.cloneNode(true);
     }
 
-    _setEventListeners = () => {
+    /* Лайк */
+    __handleLikeClick = () => {
         const placeLike = this._card.querySelector('.description__like');
-        const placeDelete = this._card.querySelector('.description__delete');
-        const picturePopup = document.querySelector('.popup_picture');
-        /* Лайк */
         placeLike.addEventListener('click', evt => {
             evt.target.classList.toggle('description__like_active');
         });
-        /* Удаление */
+    }
+
+    /* Удаление */
+    __handleDeleteClick = () => {
+        const placeDelete = this._card.querySelector('.description__delete');
         placeDelete.addEventListener('click', evt => {
             this._card.remove();
             this._card = null;
         });
+    }
+
+    __handleSetImage = () => {
         this._cardImage.addEventListener('click', () => {
             this._handleCardClick(this._data.placeFormName, this._data.placeFormLink);
         });
+    }
+
+    _setEventListeners = () => {
+        this.__handleLikeClick();
+        this.__handleDeleteClick();
+        this.__handleSetImage();
     }
 }
