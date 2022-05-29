@@ -1,7 +1,4 @@
 export class Popup {
-    _popup;
-    _popups;
-
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
     }
@@ -18,14 +15,11 @@ export class Popup {
 
     /* Если кликнули по оверлею или крестику любого из попапов - закрываем форму */
     _handleClickClose = () => {
-        this._popups = document.querySelectorAll('.popup');
-        this._popups.forEach((popup) => {
-            popup.addEventListener('mousedown', (evt) => {
-                if (evt.target.classList.contains('popup_opened') ||
-                    evt.target.classList.contains('popup__close-button')) {
-                    this.close();
-                }
-            })
+        this._popup.addEventListener('mousedown', (evt) => {
+            if (evt.target.classList.contains('popup_opened') ||
+                evt.target.classList.contains('popup__close-button')) {
+                this.close();
+            }
         })
     }
 
