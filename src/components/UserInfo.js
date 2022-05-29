@@ -18,7 +18,7 @@ export class UserInfo {
 
     /* Принимает новые данные пользователя и добавляет их на страницу */
     setUserInfo = (data) => {
-        this._nameElement.textContent = data.target.profileFormName.value;
-        this._aboutElement.textContent = data.target.profileFormProfession.value;
+        this._nameElement.textContent = data.profileFormName;
+        this._aboutElement.textContent = data.profileFormProfession;
     }
 }

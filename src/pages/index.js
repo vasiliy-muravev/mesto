@@ -11,6 +11,8 @@ import {PopupWithForm} from "../components/PopupWithForm.js";
 const profileButtonRedact = document.querySelector('.info__redact-button');
 const profileButtonAdd = document.querySelector('.profile__add-place-button');
 const profileForm = document.forms.profileForm;
+const profileNameInput = profileForm.querySelector('.popup__form-name');
+const profileJobInput = profileForm.querySelector('.popup__form-additional');
 /* Элементы попапа формы добавления места */
 const placeForm = document.forms.placeForm;
 
@@ -50,13 +52,8 @@ const placePopupWithForm = new PopupWithForm({
         popupSelector: '.popup_place',
         handleFormSubmit: (data) => {
             const newCard = new Section({}, '.places');
-            const formData = {
-                placeFormName: data.target.placeFormName.value,
-                placeFormLink: data.target.placeFormLink.value
-            }
-            newCard.addItem(getCard(formData));
+            newCard.addItem(getCard(data));
             placePopupWithForm.close();
-            placeForm.reset();
             placeFormValidator.toggleButtonState();
         }
     }
@@ -77,7 +74,9 @@ profilePopupWithForm.setEventListeners();
 
 /* Открыть попап формы профиля пользователя по кнопке редактировать */
 profileButtonRedact.addEventListener('click', () => {
-    profilePopupWithForm.insertProfileInputValue(userInfo.getUserInfo());
+    const data = userInfo.getUserInfo();
+    profileNameInput.value = data.profileFormName;
+    profileJobInput.value = data.profileFormProfession;
     profilePopupWithForm.open();
 });
 
