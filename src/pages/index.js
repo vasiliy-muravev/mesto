@@ -15,6 +15,8 @@ const profileNameInput = profileForm.querySelector('.popup__form-name');
 const profileJobInput = profileForm.querySelector('.popup__form-additional');
 /* Элементы попапа формы добавления места */
 const placeForm = document.forms.placeForm;
+/* Попап с картинкой */
+const popupWithImage = new PopupWithImage('.popup_picture');
 
 /* Настройки классов формы */
 const validationConfig = {
@@ -30,7 +32,6 @@ function getCard(data) {
     const card = new Card({
         data: data,
         handleCardClick: () => {
-            const popupWithImage = new PopupWithImage('.popup_picture');
             popupWithImage.setEventListeners();
             popupWithImage.open(card._data);
         }
@@ -39,20 +40,19 @@ function getCard(data) {
 }
 
 /* Добавляем шесть карточек «из коробки» */
-const defaultCardList = new Section({
+const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
         return getCard(item);
     }
 }, '.places');
-defaultCardList.renderItems();
+cardList.renderItems();
 
 /* Обработчик отправки формы добавления места */
 const placePopupWithForm = new PopupWithForm({
         popupSelector: '.popup_place',
         handleFormSubmit: (data) => {
-            const newCard = new Section({}, '.places');
-            newCard.addItem(getCard(data));
+            cardList.addItem(getCard(data));
             placePopupWithForm.close();
             placeFormValidator.toggleButtonState();
         }
