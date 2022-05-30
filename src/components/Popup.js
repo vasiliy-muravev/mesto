@@ -26,10 +26,7 @@ export class Popup {
     /* Закрытие всех попапов при нажатии Escape */
     _handleEscClose = (evt) => {
         if (evt.key === 'Escape') {
-            const openedPopup = document.querySelector('.popup_opened');
-            if (openedPopup) {
-                openedPopup.classList.remove('popup_opened');
-            }
+            this.close();
         }
     }
 

@@ -13,10 +13,13 @@ const profileButtonAdd = document.querySelector('.profile__add-place-button');
 const profileForm = document.forms.profileForm;
 const profileNameInput = profileForm.querySelector('.popup__form-name');
 const profileJobInput = profileForm.querySelector('.popup__form-additional');
+
 /* Элементы попапа формы добавления места */
 const placeForm = document.forms.placeForm;
+
 /* Попап с картинкой */
 const popupWithImage = new PopupWithImage('.popup_picture');
+popupWithImage.setEventListeners();
 
 /* Настройки классов формы */
 const validationConfig = {
@@ -32,7 +35,6 @@ function getCard(data) {
     const card = new Card({
         data: data,
         handleCardClick: () => {
-            popupWithImage.setEventListeners();
             popupWithImage.open(card._data);
         }
     }, '#place-template');
