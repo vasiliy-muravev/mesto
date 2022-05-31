@@ -35,7 +35,7 @@ function getCard(data) {
     const card = new Card({
         data: data,
         handleCardClick: () => {
-            popupWithImage.open(card._data);
+            popupWithImage.open(data);
         }
     }, '#place-template');
     return card.addCard();
