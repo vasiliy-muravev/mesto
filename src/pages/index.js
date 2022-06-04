@@ -7,6 +7,8 @@ import {Section} from "../components/Section.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 
+/* Тестирование git с другой машины */
+
 /* Элементы попапа формы профиля пользователя */
 const profileButtonRedact = document.querySelector('.info__redact-button');
 const profileButtonAdd = document.querySelector('.profile__add-place-button');
