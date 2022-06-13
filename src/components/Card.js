@@ -9,9 +9,12 @@ export class Card {
     addCard = () => {
         this._card = this._getTemplate();
         this._cardImage = this._card.querySelector('.place__image');
-        this._cardImage.src = this._data.placeFormLink;
-        this._cardImage.alt = this._data.placeFormName;
-        this._card.querySelector('.description__title').textContent = this._data.placeFormName;
+        // this._cardImage.src = this._data.placeFormLink;
+        this._cardImage.src = this._data.link;
+        // this._cardImage.alt = this._data.placeFormName;
+        this._cardImage.alt = this._data.name;
+        // this._card.querySelector('.description__title').textContent = this._data.placeFormName;
+        this._card.querySelector('.description__title').textContent = this._data.name;
         this._setEventListeners();
         return this._card;
     }
@@ -41,7 +44,8 @@ export class Card {
 
     __handleSetImage = () => {
         this._cardImage.addEventListener('click', () => {
-            this._handleCardClick(this._data.placeFormName, this._data.placeFormLink);
+            // this._handleCardClick(this._data.placeFormName, this._data.placeFormLink);
+            this._handleCardClick(this._data.name, this._data.link);
         });
     }
 
