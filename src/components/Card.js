@@ -3,6 +3,7 @@ export class Card {
         this._data = data;
         this._handleCardClick = handleCardClick;
         this._cardSelector = cardSelector;
+        this._popupDelete = document.querySelector('.popup_place-delete');
     }
 
     /* Добавить место используя шаблон карточки места */
@@ -15,6 +16,8 @@ export class Card {
         this._cardImage.alt = this._data.name;
         // this._card.querySelector('.description__title').textContent = this._data.placeFormName;
         this._card.querySelector('.description__title').textContent = this._data.name;
+        this._card.querySelector('.description__like-count').textContent = this._data.likes.length;
+        this._card.id = this._data._id;
         this._setEventListeners();
         return this._card;
     }
@@ -33,12 +36,12 @@ export class Card {
         });
     }
 
-    /* Удаление */
+    /* Клик Удаление */
     __handleDeleteClick = () => {
         const placeDelete = this._card.querySelector('.description__delete');
         placeDelete.addEventListener('click', evt => {
-            this._card.remove();
-            this._card = null;
+            this._popupDelete.dataset.id = this._card.id;
+            this._popupDelete.classList.add('popup_opened');
         });
     }
 

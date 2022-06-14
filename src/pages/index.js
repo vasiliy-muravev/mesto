@@ -7,6 +7,7 @@ import {Section} from "../components/Section.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {Api} from "../components/Api.js";
+import {PopupWithConfirmation} from "../components/PopupWithConfirmation.js";
 
 /* Тестирование git с другой машины */
 
@@ -48,7 +49,6 @@ function getCard(data) {
 const api = new Api();
 console.log(api.getInitialCards());
 console.log(api.getUserData());
-// console.log();
 
 api.getInitialCards().then((data) => {
     const cardList = new Section({
@@ -119,6 +119,20 @@ api.getUserData().then((data) => {
         profilePopupWithForm.open();
     });
 });
+
+/* Попап с удалением места */
+const popupWithConfirmation = new PopupWithConfirmation({
+    popupSelector: '.popup_place-delete',
+    handleFormSubmit: () => {
+        const cardId = popupWithConfirmation.getCardId();
+        let card = document.getElementById(cardId);
+        console.log(card);
+        card.remove();
+        card = null;
+        popupWithConfirmation.close();
+    }
+});
+popupWithConfirmation.setEventListeners();
 
 /* Включение валидации профиля */
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
