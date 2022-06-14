@@ -47,5 +47,17 @@ export class Api {
             })
         });
     }
+
+    addCard(data) {
+        this.url = 'https://mesto.nomoreparties.co/v1/cohort-42/cards';
+        return fetch(this.url, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link
+            })
+        });
+    }
 }
 

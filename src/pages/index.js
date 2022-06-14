@@ -65,9 +65,14 @@ api.getInitialCards().then((data) => {
             popupSelector: '.popup_place',
             handleFormSubmit: (data) => {
                 console.log(data);
-                cardList.addItem(getCard(data));
-                placePopupWithForm.close();
-                placeFormValidator.toggleButtonState();
+                api.addCard(data).then(() => {
+                    cardList.addItem(getCard(data));
+                    placePopupWithForm.close();
+                    placeFormValidator.toggleButtonState();
+                })
+                    .catch((err) => {
+                        console.log(err.statusMessage);
+                    });
             }
         }
     );
@@ -94,11 +99,13 @@ api.getUserData().then((data) => {
             popupSelector: '.popup_profile',
             handleFormSubmit: (formData) => {
                 console.log(formData);
-                userInfo.setUserInfo(formData);
-                api.setUserData(formData).catch((err) => {
-                    console.log(err);
-                });
-                profilePopupWithForm.close();
+                api.setUserData(formData).then(() => {
+                    userInfo.setUserInfo(formData);
+                    profilePopupWithForm.close();
+                })
+                    .catch((err) => {
+                        console.log(err.statusMessage);
+                    });
             }
         }
     );
