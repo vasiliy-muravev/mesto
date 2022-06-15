@@ -19,6 +19,7 @@ export class Card {
         this._card.querySelector('.description__like-count').textContent = this._data.likes.length;
         this._card.id = this._data._id;
         this._setEventListeners();
+        // console.log(this._data);
         return this._card;
     }
 
