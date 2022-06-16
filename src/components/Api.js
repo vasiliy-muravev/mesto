@@ -63,5 +63,13 @@ export class Api {
             })
         });
     }
+
+    deleteCard(cardId) {
+        this.url = 'https://mesto.nomoreparties.co/v1/cohort-42/cards/' + cardId;
+        return fetch(this.url, {
+            method: 'DELETE',
+            headers: this.headers,
+        });
+    }
 }
 

@@ -120,21 +120,29 @@ api.getAppInfo()
             profileJobInput.value = data.profileFormProfession;
             profilePopupWithForm.open();
         });
+
+
+        /* Попап с удалением места */
+        const popupWithConfirmation = new PopupWithConfirmation({
+            popupSelector: '.popup_place-delete',
+            handleFormSubmit: () => {
+                const cardId = popupWithConfirmation.getCardId();
+                let card = document.getElementById(cardId);
+                console.log(card);
+
+                api.deleteCard(cardId).then(() => {
+                    card.remove();
+                    card = null;
+                    popupWithConfirmation.close();
+                })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+        });
+        popupWithConfirmation.setEventListeners();
     });
 
-/* Попап с удалением места */
-const popupWithConfirmation = new PopupWithConfirmation({
-    popupSelector: '.popup_place-delete',
-    handleFormSubmit: () => {
-        const cardId = popupWithConfirmation.getCardId();
-        let card = document.getElementById(cardId);
-        console.log(card);
-        card.remove();
-        card = null;
-        popupWithConfirmation.close();
-    }
-});
-popupWithConfirmation.setEventListeners();
 
 /* Включение валидации профиля */
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
