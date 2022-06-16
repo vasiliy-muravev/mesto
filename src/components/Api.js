@@ -6,6 +6,10 @@ export class Api {
         };
     }
 
+    getAppInfo() {
+        return Promise.all([this.getUserData(), this.getInitialCards()]);
+    }
+
     getInitialCards() {
         this.url = 'https://mesto.nomoreparties.co/v1/cohort-42/cards';
         return fetch(this.url, {

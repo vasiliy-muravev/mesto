@@ -1,7 +1,7 @@
 import "./index.css";
 import {Card} from "../components/Card.js";
 import {FormValidator} from "../components/FormValidator.js";
-import {initialCards} from "../constants/cardsData.js";
+// import {initialCards} from "../constants/cardsData.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {Section} from "../components/Section.js";
 import {UserInfo} from "../components/UserInfo.js";
@@ -35,90 +35,92 @@ const validationConfig = {
 };
 
 /* Создание и наполнение данными разметки карточки */
-function getCard(data) {
+function getCard(data, userId) {
     const card = new Card({
         data: data,
         handleCardClick: () => {
             popupWithImage.open(data);
-        }
+        },
+        currentUserId: userId
     }, '#place-template');
     return card.addCard();
 }
 
-/* Добавляем карточки «из коробки» */
 const api = new Api();
 console.log(api.getInitialCards());
 console.log(api.getUserData());
 
-api.getInitialCards().then((data) => {
-    const cardList = new Section({
-        // items: initialCards,
-        items: data,
-        renderer: (item) => {
-            return getCard(item);
-        }
-    }, '.places');
-    cardList.renderItems();
+api.getAppInfo()
+    .then(([userData, cardsData]) => {
+        console.log(userData);
+        console.log(cardsData);
 
-    /* Обработчик отправки формы добавления места */
-    const placePopupWithForm = new PopupWithForm({
-            popupSelector: '.popup_place',
-            handleFormSubmit: (data) => {
-                console.log(data);
-                api.addCard(data).then(() => {
-                    cardList.addItem(getCard(data));
-                    placePopupWithForm.close();
-                    placeFormValidator.toggleButtonState();
-                })
-                    .catch((err) => {
-                        console.log(err.statusMessage);
-                    });
+        /* Добавляем карточки «из коробки» */
+        const cardList = new Section({
+            items: cardsData,
+            renderer: (item) => {
+                return getCard(item, userData._id);
             }
-        }
-    );
-    placePopupWithForm.setEventListeners();
+        }, '.places');
+        cardList.renderItems();
 
-    /* Открытие попап формы добавления места */
-    profileButtonAdd.addEventListener('click', () => {
-        placePopupWithForm.open();
-    });
-})
-
-api.getUserData().then((data) => {
-    console.log(data);
-    /* Обработчик «отправки» формы профиля пользователя */
-    const userInfo = new UserInfo(
-        '.info__title',
-        '.info__subtitle',
-        '.profile__avatar',
-        data
-    );
-    userInfo.setUserInfo(data);
-    userInfo.setUserAvatar(data);
-    const profilePopupWithForm = new PopupWithForm({
-            popupSelector: '.popup_profile',
-            handleFormSubmit: (formData) => {
-                console.log(formData);
-                api.setUserData(formData).then(() => {
-                    userInfo.setUserInfo(formData);
-                    profilePopupWithForm.close();
-                })
-                    .catch((err) => {
-                        console.log(err.statusMessage);
-                    });
+        /* Обработчик отправки формы добавления места */
+        const placePopupWithForm = new PopupWithForm({
+                popupSelector: '.popup_place',
+                handleFormSubmit: (data) => {
+                    console.log(data);
+                    api.addCard(data).then(() => {
+                        cardList.addItem(getCard(data, userData._id));
+                        placePopupWithForm.close();
+                        placeFormValidator.toggleButtonState();
+                    })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
             }
-        }
-    );
-    profilePopupWithForm.setEventListeners();
+        );
+        placePopupWithForm.setEventListeners();
 
-    /* Открыть попап формы профиля пользователя по кнопке редактировать */
-    profileButtonRedact.addEventListener('click', () => {
-        const data = userInfo.getUserInfo();
-        profileNameInput.value = data.profileFormName;
-        profileJobInput.value = data.profileFormProfession;
-        profilePopupWithForm.open();
+        /* Открытие попап формы добавления места */
+        profileButtonAdd.addEventListener('click', () => {
+            placePopupWithForm.open();
+        });
+
+
+        /* Обработчик «отправки» формы профиля пользователя */
+        const userInfo = new UserInfo(
+            '.info__title',
+            '.info__subtitle',
+            '.profile__avatar',
+            userData
+        );
+        userInfo.setUserInfo(userData);
+        userInfo.setUserAvatar(userData);
+        const profilePopupWithForm = new PopupWithForm({
+                popupSelector: '.popup_profile',
+                handleFormSubmit: (formData) => {
+                    console.log(formData);
+                    api.setUserData(formData).then(() => {
+                        userInfo.setUserInfo(formData);
+                        profilePopupWithForm.close();
+                    })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+            }
+        );
+        profilePopupWithForm.setEventListeners();
+
+        /* Открыть попап формы профиля пользователя по кнопке редактировать */
+        profileButtonRedact.addEventListener('click', () => {
+            const data = userInfo.getUserInfo();
+            profileNameInput.value = data.profileFormName;
+            profileJobInput.value = data.profileFormProfession;
+            profilePopupWithForm.open();
+        });
     });
-});
 
 /* Попап с удалением места */
 const popupWithConfirmation = new PopupWithConfirmation({
