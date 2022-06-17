@@ -1,15 +1,12 @@
 import "./index.css";
 import {Card} from "../components/Card.js";
 import {FormValidator} from "../components/FormValidator.js";
-// import {initialCards} from "../constants/cardsData.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {Section} from "../components/Section.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {Api} from "../components/Api.js";
 import {PopupWithConfirmation} from "../components/PopupWithConfirmation.js";
-
-/* Тестирование git с другой машины */
 
 /* Элементы попапа формы профиля пользователя */
 const profileButtonRedact = document.querySelector('.info__redact-button');
@@ -34,21 +31,48 @@ const validationConfig = {
     errorClass: "popup__form-input-error_visible",
 };
 
+const api = new Api();
+console.log(api.getInitialCards());
+console.log(api.getUserData());
+
 /* Создание и наполнение данными разметки карточки */
 function getCard(data, userId) {
     const card = new Card({
         data: data,
+        currentUserId: userId,
         handleCardClick: () => {
             popupWithImage.open(data);
         },
-        currentUserId: userId
+        handleLikeClick: (cardId) => {
+            let currentCard = document.getElementById(cardId);
+            let countLikes = currentCard.querySelector('.description__like-count');
+            if (!card.checkIfLiked()) {
+                api.setlike(cardId).then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                }).then((data) => {
+                    console.log('Ставим лайк', data.likes.length);
+                    countLikes.textContent = data.likes.length;
+                }).catch((err) => {
+                    console.log(err);
+                });
+            } else {
+                api.unsetlike(cardId).then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                }).then((data) => {
+                    console.log('Снимаем лайк', data.likes.length);
+                    countLikes.textContent = data.likes.length;
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        },
     }, '#place-template');
     return card.addCard();
 }
-
-const api = new Api();
-console.log(api.getInitialCards());
-console.log(api.getUserData());
 
 api.getAppInfo()
     .then(([userData, cardsData]) => {

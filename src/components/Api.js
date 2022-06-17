@@ -71,5 +71,21 @@ export class Api {
             headers: this.headers,
         });
     }
+
+    setlike(cardId) {
+        this.url = 'https://mesto.nomoreparties.co/v1/cohort-42/cards/' + cardId + '/likes';
+        return fetch(this.url, {
+            method: 'PUT',
+            headers: this.headers,
+        });
+    }
+
+    unsetlike(cardId) {
+        this.url = 'https://mesto.nomoreparties.co/v1/cohort-42/cards/' + cardId + '/likes';
+        return fetch(this.url, {
+            method: 'DELETE',
+            headers: this.headers,
+        });
+    }
 }
 

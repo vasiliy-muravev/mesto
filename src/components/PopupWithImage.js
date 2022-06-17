@@ -7,13 +7,6 @@ export class PopupWithImage extends Popup {
         this._pictureTitle = document.querySelector('.popup__picture-title');
     }
 
-    // open = ({placeFormName, placeFormLink}) => {
-    //     this._pictureBig.src = placeFormLink;
-    //     this._pictureBig.alt = placeFormName;
-    //     this._pictureTitle.textContent = placeFormName;
-    //     super.open();
-    // }
-
     open = ({name, link}) => {
         this._pictureBig.src = link;
         this._pictureBig.alt = name;
