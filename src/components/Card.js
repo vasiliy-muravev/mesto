@@ -18,12 +18,12 @@ export class Card {
         this._card.querySelector('.description__title').textContent = this._data.name;
         const placeLike = this._card.querySelector('.description__like');
         const placeLikeCount = this._card.querySelector('.description__like-count');
-        if (this._data.likes.length > 0) {
+        if (this._data.likes && this._data.likes.length > 0) {
             placeLikeCount.textContent = this._data.likes.length;
         } else {
             placeLikeCount.textContent = 0;
         }
-        if (this.checkIfLiked()) {
+        if (this._data.likes && this.checkIfLiked()) {
             placeLike.classList.add('description__like_active');
         } else {
             placeLike.classList.remove('description__like_active');
@@ -40,10 +40,8 @@ export class Card {
     /* Проверяем ставил ли данный пользователь лайк */
     checkIfLiked = () => {
         const likes = this._data.likes;
-        console.log(likes.length);
         if (likes.length > 0) {
             return likes.some((item) => {
-                console.log(item._id, this._user_id);
                 return item._id === this._user_id;
             });
         }

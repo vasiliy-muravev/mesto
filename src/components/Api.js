@@ -87,5 +87,17 @@ export class Api {
             headers: this.headers,
         });
     }
+
+    setAvatar(data) {
+        console.log(data);
+        this.url = 'https://mesto.nomoreparties.co/v1/cohort-42/users/me/avatar';
+        return fetch(this.url, {
+            method: 'PATCH',
+            headers: this.headers,
+            body: JSON.stringify({
+                avatar: data.link,
+            })
+        });
+    }
 }
 

@@ -18,6 +18,10 @@ const profileJobInput = profileForm.querySelector('.popup__form-additional');
 /* Элементы попапа формы добавления места */
 const placeForm = document.forms.placeForm;
 
+/* Элементы попапа формы изменения аватарки */
+const avatarForm = document.forms.avatarChangeForm;
+const avatarButton = document.querySelector('.profile__avatar-button');
+
 /* Попап с картинкой */
 const popupWithImage = new PopupWithImage('.popup_picture');
 popupWithImage.setEventListeners();
@@ -31,9 +35,9 @@ const validationConfig = {
     errorClass: "popup__form-input-error_visible",
 };
 
+const submitButton = document.querySelector(validationConfig.submitButtonSelector);
+
 const api = new Api();
-console.log(api.getInitialCards());
-console.log(api.getUserData());
 
 /* Создание и наполнение данными разметки карточки */
 function getCard(data, userId) {
@@ -74,11 +78,14 @@ function getCard(data, userId) {
     return card.addCard();
 }
 
+function renameButton(popupSelector, text) {
+    const popup = document.querySelector(popupSelector);
+    const submit = popup.querySelector('.popup__form-submit-btn');
+    submit.textContent = text;
+}
+
 api.getAppInfo()
     .then(([userData, cardsData]) => {
-        console.log(userData);
-        console.log(cardsData);
-
         /* Добавляем карточки «из коробки» */
         const cardList = new Section({
             items: cardsData,
@@ -92,11 +99,12 @@ api.getAppInfo()
         const placePopupWithForm = new PopupWithForm({
                 popupSelector: '.popup_place',
                 handleFormSubmit: (data) => {
-                    console.log(data);
+                    renameButton('.popup_place', 'Сохранение...');
                     api.addCard(data).then(() => {
                         cardList.addItem(getCard(data, userData._id));
                         placePopupWithForm.close();
                         placeFormValidator.toggleButtonState();
+                        renameButton('.popup_place', 'Сохранить');
                     })
                         .catch((err) => {
                             console.log(err);
@@ -116,18 +124,18 @@ api.getAppInfo()
         const userInfo = new UserInfo(
             '.info__title',
             '.info__subtitle',
-            '.profile__avatar-img',
-            userData
+            '.profile__avatar-img'
         );
         userInfo.setUserInfo(userData);
         userInfo.setUserAvatar(userData);
         const profilePopupWithForm = new PopupWithForm({
                 popupSelector: '.popup_profile',
                 handleFormSubmit: (formData) => {
-                    console.log(formData);
+                    renameButton('.popup_profile', 'Сохранение...');
                     api.setUserData(formData).then(() => {
                         userInfo.setUserInfo(formData);
                         profilePopupWithForm.close();
+                        renameButton('.popup_profile', 'Сохранить');
                     })
                         .catch((err) => {
                             console.log(err);
@@ -152,8 +160,6 @@ api.getAppInfo()
             handleFormSubmit: () => {
                 const cardId = popupWithConfirmation.getCardId();
                 let card = document.getElementById(cardId);
-                console.log(card);
-
                 api.deleteCard(cardId).then(() => {
                     card.remove();
                     card = null;
@@ -165,13 +171,41 @@ api.getAppInfo()
             }
         });
         popupWithConfirmation.setEventListeners();
+
+
+        /* Попап с изменением аватарки */
+        const popupWithAvatar = new PopupWithForm({
+            popupSelector: '.popup_avatar-change',
+            handleFormSubmit: (formData) => {
+                renameButton('.popup_avatar-change', 'Сохранение...');
+                api.setAvatar(formData).then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                }).then((userData) => {
+                    userInfo.setUserAvatar(userData);
+                    popupWithAvatar.close();
+                    renameButton('.popup_avatar-change', 'Сохранить');
+                })
+            }
+        });
+        popupWithAvatar.setEventListeners();
+
+        /* Открытие попап формы добавления места */
+        avatarButton.addEventListener('click', () => {
+            popupWithAvatar.open();
+        });
     });
 
 
-/* Включение валидации профиля */
+/* Включение валидации формы изменения профиля */
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
 profileFormValidator.enableValidation();
 
-/* Включение валидации места */
+/* Включение валидации формы добавления места */
 const placeFormValidator = new FormValidator(validationConfig, placeForm);
 placeFormValidator.enableValidation();
+
+/* Включение валидации формы аватарки */
+const avatarFormValidator = new FormValidator(validationConfig, avatarForm);
+avatarFormValidator.enableValidation();
