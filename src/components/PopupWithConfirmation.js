@@ -20,5 +20,10 @@ export class PopupWithConfirmation extends Popup {
         });
     }
 
+    removeCard = (cardId) => {
+        let card = document.getElementById(cardId);
+        card.remove();
+        card = null;
+    }
 
 }

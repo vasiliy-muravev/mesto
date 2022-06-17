@@ -2,6 +2,8 @@ export class FormValidator {
     constructor(config, formElement) {
         this._config = config;
         this._formElement = formElement;
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+        this._submitButton = this._formElement.querySelector(this._config.submitButtonSelector);
     }
 
     _showInputError = (inputElement, errorMessage) => {
@@ -33,8 +35,6 @@ export class FormValidator {
     };
 
     _setEventListeners = () => {
-        this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-        this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement, );
@@ -46,11 +46,11 @@ export class FormValidator {
 
     toggleButtonState = () => {
         if (this._hasInvalidInput(this._inputList)) {
-            this._buttonElement.classList.add(this._config.inactiveButtonClass);
-            this._buttonElement.disabled = true;
+            this._submitButton.classList.add(this._config.inactiveButtonClass);
+            this._submitButton.disabled = true;
         } else {
-            this._buttonElement.classList.remove(this._config.inactiveButtonClass);
-            this._buttonElement.disabled = false;
+            this._submitButton.classList.remove(this._config.inactiveButtonClass);
+            this._submitButton.disabled = false;
         }
     };
 

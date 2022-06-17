@@ -1,8 +1,9 @@
 export class Card {
-    constructor({data, currentUserId, handleCardClick, handleLikeClick}, cardSelector) {
+    constructor({data, currentUserId, handleCardClick, handleLikeClick, handleDeleteClick}, cardSelector) {
         this._data = data;
         this._handleCardClick = handleCardClick;
         this._handleLikeClick = handleLikeClick;
+        this._handleDeleteClick = handleDeleteClick;
         this._cardSelector = cardSelector;
         this._popupDelete = document.querySelector('.popup_place-delete');
         this._user_id = currentUserId;
@@ -10,7 +11,7 @@ export class Card {
     }
 
     /* Добавить место используя шаблон карточки места */
-    addCard = () => {
+    createCard = () => {
         this._card = this._getTemplate();
         this._cardImage = this._card.querySelector('.place__image');
         this._cardImage.src = this._data.link;
@@ -47,6 +48,14 @@ export class Card {
         }
     }
 
+    /* Закрашивание лайка и простановка количества из ответа от сервера */
+    likeCard = (currentCard, data) => {
+        const like = currentCard.querySelector('.description__like');
+        let countLikes = currentCard.querySelector('.description__like-count');
+        like.classList.toggle('description__like_active');
+        countLikes.textContent = data.likes.length;
+    }
+
     /* Получить шаблон */
     _getTemplate = () => {
         const placeTemplate = document.querySelector(this._cardSelector).content.querySelector('.place');
@@ -57,18 +66,18 @@ export class Card {
     __handleLikeClick = () => {
         const placeLike = this._card.querySelector('.description__like');
         const cardId = this._card.id;
-        placeLike.addEventListener('click', evt => {
+        placeLike.addEventListener('click', () => {
             this._handleLikeClick(cardId);
-            evt.target.classList.toggle('description__like_active');
         });
     }
 
     /* Клик Удаление */
     __handleDeleteClick = () => {
         const placeDelete = this._card.querySelector('.description__delete');
-        placeDelete.addEventListener('click', evt => {
+        placeDelete.addEventListener('click', () => {
             this._popupDelete.dataset.id = this._card.id;
-            this._popupDelete.classList.add('popup_opened');
+            /* Открытие попапа формы с удалением места */
+            this._handleDeleteClick();
         });
     }
 
