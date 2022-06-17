@@ -116,7 +116,7 @@ api.getAppInfo()
         const userInfo = new UserInfo(
             '.info__title',
             '.info__subtitle',
-            '.profile__avatar',
+            '.profile__avatar-img',
             userData
         );
         userInfo.setUserInfo(userData);
