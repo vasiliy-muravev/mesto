@@ -49,11 +49,16 @@ export class Card {
     }
 
     /* Закрашивание лайка и простановка количества из ответа от сервера */
-    likeCard = (currentCard, data) => {
-        const like = currentCard.querySelector('.description__like');
-        let countLikes = currentCard.querySelector('.description__like-count');
+    likeCard = (data) => {
+        const like = this._card.querySelector('.description__like');
+        const countLikes = this._card.querySelector('.description__like-count');
         like.classList.toggle('description__like_active');
         countLikes.textContent = data.likes.length;
+    }
+
+    removeCard = () => {
+        this._card.remove();
+        this._card = null;
     }
 
     /* Получить шаблон */

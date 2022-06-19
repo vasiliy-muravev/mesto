@@ -40,16 +40,13 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-42/');
 /* Попап с удалением места */
 const popupWithConfirmation = new PopupWithConfirmation({
     popupSelector: '.popup_place-delete',
-    handleFormSubmit: () => {
+    handleFormSubmit: (card) => {
         /* Удаление реализовано через получение id карточки из попапа удаления места */
         const cardId = popupWithConfirmation.getCardId();
         api.deleteCard(cardId).then(() => {
-            popupWithConfirmation.removeCard(cardId);
+            card.removeCard();
             popupWithConfirmation.close();
         })
-            .catch((err) => {
-                console.log(err);
-            });
     }
 });
 popupWithConfirmation.setEventListeners();
@@ -64,30 +61,23 @@ function getCard(data, userId) {
             popupWithImage.open(data);
         },
         handleLikeClick: (cardId) => {
-            let currentCard = document.getElementById(cardId);
-
             if (!card.checkIfLiked()) {
                 api.setlike(cardId)
-                    .then(res => api._getResponseData(res))
                     .then((data) => {
                         console.log('Ставим лайк', data.likes.length);
-                        card.likeCard(currentCard, data);
-                    }).catch((err) => {
-                    console.log(err);
-                });
+                        card.likeCard(data);
+                    })
             } else {
                 api.unsetlike(cardId)
-                    .then(res => api._getResponseData(res))
                     .then((data) => {
                         console.log('Снимаем лайк', data.likes.length);
-                        card.likeCard(currentCard, data);
-                    }).catch((err) => {
-                    console.log(err);
-                });
+                        card.likeCard(data);
+                    })
             }
         },
         /* Открытие попапа формы с удалением места */
         handleDeleteClick: () => {
+            popupWithConfirmation.setSubmitHandler(card);
             popupWithConfirmation.open();
         },
     }, '#place-template');
@@ -121,9 +111,6 @@ api.getAppInfo()
                         placePopupWithForm.close();
                         placeFormValidator.toggleButtonState();
                     })
-                        .catch((err) => {
-                            console.log(err);
-                        })
                         .finally(() => {
                             renameButton('.popup_place', 'Сохранить');
                         });
@@ -153,9 +140,6 @@ api.getAppInfo()
                         userInfo.setUserInfo(formData);
                         profilePopupWithForm.close();
                     })
-                        .catch((err) => {
-                            console.log(err);
-                        })
                         .finally(() => {
                             renameButton('.popup_profile', 'Сохранить');
                         });
@@ -178,7 +162,6 @@ api.getAppInfo()
             handleFormSubmit: (formData) => {
                 renameButton('.popup_avatar-change', 'Сохранение...');
                 api.setAvatar(formData)
-                    .then(res => api._getResponseData(res))
                     .then((userData) => {
                         userInfo.setUserAvatar(userData);
                         popupWithAvatar.close();

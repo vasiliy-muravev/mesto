@@ -15,16 +15,14 @@ export class Api {
         this.url = this._baseUrl + 'cards';
         return fetch(this.url, {
             headers: this.headers
-        })
-            .then(res => this._getResponseData(res))
+        }).then(res => this._getResponseData(res))
     }
 
     getUserData() {
         this.url = this._baseUrl + 'users/me';
         return fetch(this.url, {
             headers: this.headers
-        })
-            .then(res => this._getResponseData(res))
+        }).then(res => this._getResponseData(res))
     }
 
     setUserData(data) {
@@ -36,7 +34,7 @@ export class Api {
                 name: data.name,
                 about: data.about
             })
-        });
+        }).then(res => this._getResponseData(res));
     }
 
     addCard(data) {
@@ -48,7 +46,7 @@ export class Api {
                 name: data.name,
                 link: data.link
             })
-        });
+        }).then(res => this._getResponseData(res));
     }
 
     deleteCard(cardId) {
@@ -56,7 +54,7 @@ export class Api {
         return fetch(this.url, {
             method: 'DELETE',
             headers: this.headers,
-        });
+        }).then(res => this._getResponseData(res));
     }
 
     setlike(cardId) {
@@ -64,7 +62,7 @@ export class Api {
         return fetch(this.url, {
             method: 'PUT',
             headers: this.headers,
-        });
+        }).then(res => this._getResponseData(res));
     }
 
     unsetlike(cardId) {
@@ -72,11 +70,10 @@ export class Api {
         return fetch(this.url, {
             method: 'DELETE',
             headers: this.headers,
-        });
+        }).then(res => this._getResponseData(res));
     }
 
     setAvatar(data) {
-        console.log(data);
         this.url = this._baseUrl + 'users/me/avatar';
         return fetch(this.url, {
             method: 'PATCH',
@@ -84,7 +81,7 @@ export class Api {
             body: JSON.stringify({
                 avatar: data.link,
             })
-        });
+        }).then(res => this._getResponseData(res));
     }
 
     _getResponseData(res) {

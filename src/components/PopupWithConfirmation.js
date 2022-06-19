@@ -11,19 +11,16 @@ export class PopupWithConfirmation extends Popup {
         return this._popup.dataset.id;
     }
 
+    setSubmitHandler(card) {
+        this.card = card;
+    }
+
     setEventListeners = () => {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             console.log(this);
             evt.preventDefault();
-            this._handleFormSubmit();
+            this._handleFormSubmit(this.card);
         });
     }
-
-    removeCard = (cardId) => {
-        let card = document.getElementById(cardId);
-        card.remove();
-        card = null;
-    }
-
 }
